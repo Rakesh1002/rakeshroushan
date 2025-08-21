@@ -8,7 +8,8 @@ export const Posts: CollectionConfig = {
     defaultColumns: ['title', 'author', 'publishedAt', 'status'],
   },
   access: {
-    create: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    create: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
     read: ({ req: { user } }) => {
       // Public access for published posts, authenticated for drafts
       if (user?.role === 'admin' || user?.role === 'editor') {
@@ -20,7 +21,8 @@ export const Posts: CollectionConfig = {
         },
       }
     },
-    update: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    update: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
     delete: ({ req: { user } }) => Boolean(user?.role === 'admin'),
   },
   fields: [
@@ -171,7 +173,9 @@ export const Posts: CollectionConfig = {
           ({ siblingData }) => {
             if (siblingData.content) {
               // Rough calculation: 200 words per minute
-              const wordCount = JSON.stringify(siblingData.content).split(' ').length
+              const wordCount = JSON.stringify(siblingData.content).split(
+                ' '
+              ).length
               return Math.ceil(wordCount / 200)
             }
             return 5

@@ -1,9 +1,12 @@
 // Chat API functions for secure server-side OpenAI integration
 
 export async function getChatResponse(
-  message: string, 
-  conversationHistory: Array<{role: 'user' | 'assistant', content: string}> = []
-): Promise<{ response: string, shouldShowContact: boolean }> {
+  message: string,
+  conversationHistory: Array<{
+    role: 'user' | 'assistant'
+    content: string
+  }> = []
+): Promise<{ response: string; shouldShowContact: boolean }> {
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
@@ -12,7 +15,7 @@ export async function getChatResponse(
       },
       body: JSON.stringify({
         message,
-        conversationHistory
+        conversationHistory,
       }),
     })
 
@@ -22,14 +25,17 @@ export async function getChatResponse(
 
     const data = await response.json()
     return {
-      response: data.response || "I'm sorry, I couldn't process that right now. Could you try asking again?",
-      shouldShowContact: data.shouldShowContact || false
+      response:
+        data.response ||
+        "I'm sorry, I couldn't process that right now. Could you try asking again?",
+      shouldShowContact: data.shouldShowContact || false,
     }
   } catch (error) {
     console.error('Chat API Error:', error)
     return {
-      response: "I'm experiencing some technical difficulties right now. Feel free to reach out directly through the contact form!",
-      shouldShowContact: true
+      response:
+        "I'm experiencing some technical difficulties right now. Feel free to reach out directly through the contact form!",
+      shouldShowContact: true,
     }
   }
 }
@@ -37,12 +43,23 @@ export async function getChatResponse(
 // Check if user message indicates interest in connecting/hiring
 export function shouldShowContactForm(message: string): boolean {
   const contactKeywords = [
-    'hire', 'job', 'opportunity', 'work together', 'collaborate',
-    'contact', 'reach out', 'connect', 'email', 'meeting',
-    'project', 'consulting', 'available', 'interested'
+    'hire',
+    'job',
+    'opportunity',
+    'work together',
+    'collaborate',
+    'contact',
+    'reach out',
+    'connect',
+    'email',
+    'meeting',
+    'project',
+    'consulting',
+    'available',
+    'interested',
   ]
-  
-  return contactKeywords.some(keyword => 
+
+  return contactKeywords.some(keyword =>
     message.toLowerCase().includes(keyword)
   )
 }

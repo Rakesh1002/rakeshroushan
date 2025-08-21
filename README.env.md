@@ -39,6 +39,7 @@ NEXT_PUBLIC_SITE_URL=https://yourportfolio.com
 ## Production Notes
 
 For production deployment:
+
 - Use server-side API routes instead of client-side OpenAI calls
 - Store sensitive keys securely (not in `NEXT_PUBLIC_` variables)
 - Consider using services like Resend, SendGrid, or AWS SES for email

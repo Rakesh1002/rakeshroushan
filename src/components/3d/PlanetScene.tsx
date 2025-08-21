@@ -11,7 +11,7 @@ export function Planet() {
   const planetRef = useRef<THREE.Mesh>(null)
   const atmosphereRef = useRef<THREE.Mesh>(null)
 
-  useFrame((state) => {
+  useFrame(state => {
     if (planetRef.current) {
       // Slow rotation
       planetRef.current.rotation.y += 0.002
@@ -67,15 +67,16 @@ export function Rocketship() {
   useEffect(() => {
     if (rocketRef.current) {
       // Initial animation - rocket landing
-      gsap.fromTo(rocketRef.current.position, 
+      gsap.fromTo(
+        rocketRef.current.position,
         { y: 5, x: -3, z: 1 },
-        { 
-          y: -0.3, 
-          x: -2.2, 
+        {
+          y: -0.3,
+          x: -2.2,
           z: 0.5,
           duration: 3,
-          ease: "power2.out",
-          delay: 2
+          ease: 'power2.out',
+          delay: 2,
         }
       )
 
@@ -85,18 +86,19 @@ export function Rocketship() {
         duration: 2,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut",
-        delay: 5
+        ease: 'sine.inOut',
+        delay: 5,
       })
     }
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (flameRef.current) {
       // Flickering flame effect
       const intensity = 0.5 + Math.sin(state.clock.elapsedTime * 10) * 0.3
       flameRef.current.scale.y = intensity
-      flameRef.current.material.opacity = intensity * 0.8
+      ;(flameRef.current.material as THREE.MeshPhongMaterial).opacity =
+        intensity * 0.8
     }
   })
 
@@ -105,7 +107,7 @@ export function Rocketship() {
       {/* Rocket Body */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.08, 0.12, 0.6, 8]} />
-        <meshPhongMaterial color="#e5e7eb" metalness={0.8} roughness={0.2} />
+        <meshStandardMaterial color="#e5e7eb" metalness={0.8} roughness={0.2} />
       </mesh>
 
       {/* Rocket Nose Cone */}
@@ -115,13 +117,13 @@ export function Rocketship() {
       </mesh>
 
       {/* Rocket Fins */}
-      {[0, 1, 2, 3].map((i) => (
+      {[0, 1, 2, 3].map(i => (
         <mesh
           key={i}
           position={[
             Math.sin((i * Math.PI) / 2) * 0.15,
             -0.25,
-            Math.cos((i * Math.PI) / 2) * 0.15
+            Math.cos((i * Math.PI) / 2) * 0.15,
           ]}
           rotation={[0, (i * Math.PI) / 2, 0]}
         >
@@ -162,10 +164,12 @@ export function Stars() {
     starPositions[i * 3 + 2] = (Math.random() - 0.5) * 50
   }
 
-  useFrame((state) => {
+  useFrame(state => {
     if (starsRef.current) {
-      starsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.1
-      starsRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.03) * 0.1
+      starsRef.current.rotation.x =
+        Math.sin(state.clock.elapsedTime * 0.05) * 0.1
+      starsRef.current.rotation.y =
+        Math.sin(state.clock.elapsedTime * 0.03) * 0.1
     }
   })
 
@@ -177,6 +181,7 @@ export function Stars() {
           count={200}
           array={starPositions}
           itemSize={3}
+          args={[starPositions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial

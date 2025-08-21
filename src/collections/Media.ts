@@ -6,9 +6,11 @@ export const Media: CollectionConfig = {
     group: 'Content',
   },
   access: {
-    create: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    create: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
     read: () => true, // Public read access for media
-    update: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    update: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
     delete: ({ req: { user } }) => Boolean(user?.role === 'admin'),
   },
   upload: {

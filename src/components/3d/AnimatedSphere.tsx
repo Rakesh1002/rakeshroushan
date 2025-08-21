@@ -13,11 +13,12 @@ export function AnimatedSphere({ position = [0, 0, 0] }: AnimatedSphereProps) {
   const meshRef = useRef<Mesh>(null)
   const targetPosition = useRef(new Vector3(...position))
 
-  useFrame((state) => {
+  useFrame(state => {
     if (meshRef.current) {
       // Smooth floating motion
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.5) * 0.3
-      
+      meshRef.current.position.y =
+        position[1] + Math.sin(state.clock.elapsedTime * 1.5) * 0.3
+
       // Gentle rotation
       meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
     }

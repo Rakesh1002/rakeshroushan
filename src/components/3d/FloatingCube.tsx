@@ -12,11 +12,12 @@ interface FloatingCubeProps {
 export function FloatingCube({ position = [0, 0, 0] }: FloatingCubeProps) {
   const meshRef = useRef<Mesh>(null)
 
-  useFrame((state) => {
+  useFrame(state => {
     if (meshRef.current) {
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.3
       meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.3
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 2) * 0.2
+      meshRef.current.position.y =
+        position[1] + Math.sin(state.clock.elapsedTime * 2) * 0.2
     }
   })
 

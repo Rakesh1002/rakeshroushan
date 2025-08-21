@@ -1,160 +1,217 @@
-'use client'
-
 import { notFound } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { Calendar, Clock, User, ArrowLeft, Tag } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { getPostBySlug, getPublishedPosts } from '@/lib/payload'
 
-interface BlogPost {
-  id: string
+export const revalidate = 3600
+
+interface PayloadPost {
+  id: number
   title: string
-  content: any
+  excerpt?: string
   slug: string
-  publishedAt: string
-  readingTime: number
+  publishedAt?: string | null
+  updatedAt?: string | null
+  readingTime?: number | null
   category: string
-  featured: boolean
-  author: {
-    firstName: string
-    lastName: string
-  }
-  excerpt: string
+  featured?: boolean | null
+  content?: unknown
+  author?:
+    | number
+    | {
+        firstName?: string
+        lastName?: string
+      }
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const [post, setPost] = useState<BlogPost | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(`/api/posts/${params.slug}`)
-        if (response.ok) {
-          const data = await response.json()
-          setPost(data)
-        } else {
-          notFound()
-        }
-      } catch (error) {
-        console.error('Error fetching post:', error)
-        notFound()
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPost()
-  }, [params.slug])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading article...</p>
-        </div>
-      </div>
-    )
+export async function generateStaticParams() {
+  try {
+    const postsResult = await getPublishedPosts(100)
+    const docs = postsResult?.docs || []
+    return docs.map((post: PayloadPost) => ({ slug: post.slug }))
+  } catch {
+    return []
   }
+}
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://rakeshroushan.com'
+  const post: PayloadPost | null = await getPostBySlug(params.slug)
+  if (!post) return {}
+
+  const title = post.title
+  const description =
+    post.excerpt ||
+    'Insights on AI, product strategy, and building the future of audio and knowledge technology.'
+  const url = `${baseUrl}/blog/${post.slug}`
+  const imageUrl = `${baseUrl}/memoji-original.png`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [imageUrl],
+    },
+  }
+}
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const post: PayloadPost | null = await getPostBySlug(params.slug)
   if (!post) {
     notFound()
   }
 
+  const publishedTime = post.publishedAt || new Date().toISOString()
+  const modifiedTime =
+    post.updatedAt || post.publishedAt || new Date().toISOString()
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://rakeshroushan.com'
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    author: {
+      '@type': 'Person',
+      name: `${typeof post.author === 'object' ? post.author?.firstName || 'Anonymous' : 'Anonymous'} ${typeof post.author === 'object' ? post.author?.lastName || 'Author' : 'Author'}`.trim(),
+    },
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    mainEntityOfPage: `${baseUrl}/blog/${post.slug}`,
+    image: [`${baseUrl}/memoji-original.png`],
+  }
+
+  const breadcrumbsJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: post.title,
+        item: `${baseUrl}/blog/${post.slug}`,
+      },
+    ],
+  }
+
   return (
     <article className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-8 py-6 max-w-4xl">
-          <Link href="/#blog">
-            <Button variant="outline" className="mb-6 gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Button>
+      <div className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto max-w-4xl px-8 py-6">
+          <Link
+            href="/#blog"
+            className="inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm"
+          >
+            ← Back to Blog
           </Link>
         </div>
       </div>
 
-      {/* Article Content */}
-      <div className="container mx-auto px-8 py-16 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Category Badge */}
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-700">
-              <Tag className="w-4 h-4" />
-              {post.category}
+      <div className="container mx-auto max-w-4xl px-8 py-16">
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700">
+            {post.category}
+          </span>
+        </div>
+
+        <h1 className="mb-8 text-5xl leading-tight font-bold text-gray-900">
+          {post.title}
+        </h1>
+
+        <div className="mb-12 flex flex-wrap items-center gap-6 border-b border-gray-200 pb-8 text-gray-600">
+          <div className="flex items-center gap-2">
+            <span className="font-medium">
+              {typeof post.author === 'object'
+                ? post.author?.firstName || 'Anonymous'
+                : 'Anonymous'}{' '}
+              {typeof post.author === 'object'
+                ? post.author?.lastName || 'Author'
+                : 'Author'}
             </span>
           </div>
-
-          {/* Title */}
-          <h1 className="text-5xl font-bold text-gray-900 mb-8 leading-tight">
-            {post.title}
-          </h1>
-
-          {/* Meta Information */}
-          <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-12 pb-8 border-b border-gray-200">
-            <div className="flex items-center gap-2">
-              <User className="w-5 h-5" />
-              <span className="font-medium">
-                {post.author.firstName} {post.author.lastName}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              <span>
-                {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>{post.readingTime} min read</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <span>
+              {new Date(publishedTime).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
           </div>
-
-          {/* Excerpt */}
-          {post.excerpt && (
-            <div className="text-xl text-gray-600 leading-relaxed mb-12 p-6 bg-gray-50 rounded-2xl border-l-4 border-purple-600">
-              {post.excerpt}
-            </div>
-          )}
-
-          {/* Content */}
-          <div className="prose prose-lg prose-gray max-w-none">
-            {/* For now, we'll render the content as plain text/HTML */}
-            {/* In a real implementation, you'd render the rich text content properly */}
-            <div className="text-gray-800 leading-relaxed space-y-6">
-              {typeof post.content === 'string' ? (
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              ) : (
-                <p className="text-lg">
-                  Content will be rendered here once the rich text editor is properly configured.
-                  For now, this is a placeholder for the blog post content.
-                </p>
-              )}
-            </div>
+          <div className="flex items-center gap-2">
+            <span>{post.readingTime || 5} min read</span>
           </div>
+        </div>
 
-          {/* Back to Blog */}
-          <div className="mt-16 pt-8 border-t border-gray-200 text-center">
-            <Link href="/#blog">
-              <Button variant="outline" className="gap-2 px-8 py-3">
-                <ArrowLeft className="w-4 h-4" />
-                Back to All Posts
-              </Button>
-            </Link>
+        {post.excerpt && (
+          <div className="mb-12 rounded-2xl border-l-4 border-purple-600 bg-gray-50 p-6 text-xl leading-relaxed text-gray-600">
+            {post.excerpt}
           </div>
-        </motion.div>
+        )}
+
+        <div className="prose prose-lg prose-gray max-w-none">
+          <div className="space-y-6 leading-relaxed text-gray-800">
+            {typeof post.content === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            ) : (
+              <p className="text-lg">
+                Content will be rendered here once the rich text editor is
+                properly configured.
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-16 border-t border-gray-200 pt-8 text-center">
+          <Link
+            href="/#blog"
+            className="inline-flex items-center gap-2 rounded-md border px-6 py-3 text-sm"
+          >
+            ← Back to All Posts
+          </Link>
+        </div>
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
+      />
     </article>
   )
 }

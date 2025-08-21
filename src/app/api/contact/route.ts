@@ -47,12 +47,16 @@ export async function POST(request: NextRequest) {
                 <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Email:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="mailto:${email}">${email}</a></td>
               </tr>
-              ${company ? `
+              ${
+                company
+                  ? `
               <tr>
                 <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Company:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #ddd;">${company}</td>
               </tr>
-              ` : ''}
+              `
+                  : ''
+              }
               <tr>
                 <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Type:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #ddd;">${type}</td>
@@ -125,7 +129,7 @@ export async function POST(request: NextRequest) {
     // Send emails
     await Promise.all([
       transporter.sendMail(emailToRakesh),
-      transporter.sendMail(autoReply)
+      transporter.sendMail(autoReply),
     ])
 
     // Log successful submission (you can also save to database here)
@@ -135,14 +139,13 @@ export async function POST(request: NextRequest) {
       company,
       type,
       timestamp,
-      source
+      source,
     })
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Message sent successfully' 
+    return NextResponse.json({
+      success: true,
+      message: 'Message sent successfully',
     })
-
   } catch (error) {
     console.error('Contact form error:', error)
     return NextResponse.json(

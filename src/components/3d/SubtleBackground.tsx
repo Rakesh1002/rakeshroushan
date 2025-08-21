@@ -8,7 +8,7 @@ import * as THREE from 'three'
 // Gentle floating particles
 export function SubtleParticles({ count = 50 }: { count?: number }) {
   const points = useRef<THREE.Points>(null)
-  
+
   const particlesPosition = useMemo(() => {
     const positions = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
@@ -19,7 +19,7 @@ export function SubtleParticles({ count = 50 }: { count?: number }) {
     return positions
   }, [count])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (points.current) {
       points.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1
       points.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.15) * 0.1
@@ -27,7 +27,12 @@ export function SubtleParticles({ count = 50 }: { count?: number }) {
   })
 
   return (
-    <Points ref={points} positions={particlesPosition} stride={3} frustumCulled={false}>
+    <Points
+      ref={points}
+      positions={particlesPosition}
+      stride={3}
+      frustumCulled={false}
+    >
       <PointMaterial
         transparent
         color="#ffffff"
@@ -44,7 +49,7 @@ export function SubtleParticles({ count = 50 }: { count?: number }) {
 export function SubtleOrb() {
   const meshRef = useRef<THREE.Mesh>(null)
 
-  useFrame((state) => {
+  useFrame(state => {
     if (meshRef.current) {
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1
       meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1
@@ -70,16 +75,18 @@ export function SubtleOrb() {
 export function SubtleWaves() {
   const meshRef = useRef<THREE.Mesh>(null)
 
-  useFrame((state) => {
+  useFrame(state => {
     if (meshRef.current) {
       const geometry = meshRef.current.geometry as THREE.PlaneGeometry
       const position = geometry.attributes.position
-      
+
       for (let i = 0; i < position.count; i++) {
         const x = position.getX(i)
         const y = position.getY(i)
-        const wave = Math.sin(x * 0.5 + state.clock.elapsedTime * 0.5) * 
-                    Math.sin(y * 0.5 + state.clock.elapsedTime * 0.3) * 0.1
+        const wave =
+          Math.sin(x * 0.5 + state.clock.elapsedTime * 0.5) *
+          Math.sin(y * 0.5 + state.clock.elapsedTime * 0.3) *
+          0.1
         position.setZ(i, wave)
       }
       position.needsUpdate = true
@@ -89,12 +96,7 @@ export function SubtleWaves() {
   return (
     <mesh ref={meshRef} position={[0, 0, -5]} rotation={[-Math.PI / 4, 0, 0]}>
       <planeGeometry args={[15, 15, 30, 30]} />
-      <meshPhongMaterial
-        color="#6366f1"
-        transparent
-        opacity={0.1}
-        wireframe
-      />
+      <meshPhongMaterial color="#6366f1" transparent opacity={0.1} wireframe />
     </mesh>
   )
 }

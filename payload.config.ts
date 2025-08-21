@@ -2,10 +2,14 @@ import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import 'dotenv/config'
 import sharp from 'sharp'
 import nodemailer from 'nodemailer'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // Import collections
 import { Users } from './src/collections/Users'
@@ -17,9 +21,8 @@ export default buildConfig({
   admin: {
     user: 'users',
     meta: {
-      titleSuffix: '- Blog Admin',
-      favicon: '/favicon.ico',
-      ogImage: '/og-image.jpg',
+      titleSuffix: '- Rakesh Roushan',
+      // ogImage: '/og-image.jpg',
     },
   },
   editor: lexicalEditor({}),
@@ -36,12 +39,7 @@ export default buildConfig({
       },
     }),
   }),
-  collections: [
-    Users,
-    Posts,
-    Media,
-    Subscribers,
-  ],
+  collections: [Users, Posts, Media, Subscribers],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

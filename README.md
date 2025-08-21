@@ -27,23 +27,26 @@ A superfast, responsive personal portfolio website built with Three.js, Next.js 
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm/yarn
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Rakesh1002/portfolio
    cd portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Run the development server**
+
    ```bash
    pnpm dev
    ```
@@ -72,18 +75,23 @@ src/
 ## 🎨 Customization
 
 ### Personal Information
+
 Update the content in the section components:
+
 - `src/components/sections/Hero.tsx` - Name and title
 - `src/components/sections/About.tsx` - Bio and skills
 - `src/components/sections/Projects.tsx` - Portfolio projects
 - `src/components/sections/Contact.tsx` - Contact information
 
 ### 3D Scene
+
 Modify the 3D elements in:
+
 - `src/components/Scene.tsx` - Main scene setup
 - `src/components/3d/` - Individual 3D objects
 
 ### Styling
+
 - Colors and theme: `src/app/globals.css`
 - Component styles: Individual component files with Tailwind CSS
 
@@ -105,19 +113,24 @@ Modify the 3D elements in:
 ## 🔗 Live Projects Integration
 
 The portfolio automatically pulls data from:
+
 - **GitHub**: [Rakesh1002](https://github.com/Rakesh1002/) repositories
 - **LinkedIn**: [rakeshroushan1002](https://www.linkedin.com/in/rakeshroushan1002/) profile
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 ```bash
 pnpm build
 ```
+
 Then deploy to [Vercel](https://vercel.com)
 
 ### Other Platforms
+
 The build output is compatible with any static hosting service:
+
 ```bash
 pnpm build
 pnpm export  # For static export if needed
@@ -149,10 +162,12 @@ This project is open source and available under the [MIT License](LICENSE).
 Multi-versatile, pragmatic, curious & result-oriented professional based in Bengaluru, India. Rakesh specializes in building and scaling technology-driven ventures, passionate about democratizing audio creation and knowledge access using AI.
 
 **Current Ventures:**
+
 - **AudioPod AI** (Oct 2024 - Present): Co-Founder creating AI-driven audio tools
 - **UnQuest AI** (Nov 2023 - Present): Founder building advanced knowledge management systems
 
 **Connect with Rakesh:**
+
 - **LinkedIn**: [rakeshroushan1002](https://www.linkedin.com/in/rakeshroushan1002/)
 - **GitHub**: [Rakesh1002](https://github.com/Rakesh1002/)
 - **Location**: Bengaluru, Karnataka, India

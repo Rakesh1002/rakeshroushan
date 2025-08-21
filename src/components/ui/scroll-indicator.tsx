@@ -8,7 +8,8 @@ export function ScrollIndicator() {
 
   useEffect(() => {
     const updateScrollProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight
       const scrolled = window.scrollY
       const progress = (scrolled / scrollHeight) * 100
       setScrollProgress(progress)
@@ -20,7 +21,7 @@ export function ScrollIndicator() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 to-pink-600 z-50 origin-left"
+      className="fixed top-0 right-0 left-0 z-50 h-1 origin-left bg-gradient-to-r from-purple-600 to-pink-600"
       style={{ scaleX: scrollProgress / 100 }}
       initial={{ scaleX: 0 }}
       animate={{ scaleX: scrollProgress / 100 }}

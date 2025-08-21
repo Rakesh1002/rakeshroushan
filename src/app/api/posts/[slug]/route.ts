@@ -1,4 +1,4 @@
-import { getPayload } from '@/lib/payload'
+import { getPayloadInstance } from '@/lib/payload'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
@@ -6,15 +6,15 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const payload = await getPayload()
-    
+    const payload = await getPayloadInstance()
+
     const posts = await payload.find({
       collection: 'posts',
       where: {
         slug: {
           equals: params.slug,
         },
-        _status: {
+        status: {
           equals: 'published',
         },
       },
@@ -38,14 +38,18 @@ export async function GET(
       category: post.category,
       featured: post.featured,
       author: {
-        firstName: post.author?.firstName || 'Anonymous',
-        lastName: post.author?.lastName || 'Author',
+        firstName:
+          (typeof post.author === 'object' && post.author?.firstName) ||
+          'Anonymous',
+        lastName:
+          (typeof post.author === 'object' && post.author?.lastName) ||
+          'Author',
       },
       excerpt: post.excerpt,
     }
 
     return NextResponse.json(transformedPost)
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching post:', error)
     return NextResponse.json(
       { error: 'Internal server error' },

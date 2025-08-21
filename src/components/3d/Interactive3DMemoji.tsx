@@ -12,7 +12,9 @@ export function Memoji3DSphere() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   // Load memoji texture
-  const texture = useTexture('https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png')
+  const texture = useTexture(
+    'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png'
+  )
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -31,16 +33,16 @@ export function Memoji3DSphere() {
       // Rotate based on mouse position
       const targetRotationX = mousePosition.y * 0.5
       const targetRotationY = mousePosition.x * 0.5
-      
+
       // Smooth interpolation
       meshRef.current.rotation.x = THREE.MathUtils.lerp(
-        meshRef.current.rotation.x, 
-        targetRotationX, 
+        meshRef.current.rotation.x,
+        targetRotationX,
         0.1
       )
       meshRef.current.rotation.y = THREE.MathUtils.lerp(
-        meshRef.current.rotation.y, 
-        targetRotationY, 
+        meshRef.current.rotation.y,
+        targetRotationY,
         0.1
       )
 
@@ -51,11 +53,7 @@ export function Memoji3DSphere() {
 
   return (
     <Sphere ref={meshRef} args={[1, 64, 64]} position={[0, 0, 0]}>
-      <meshPhongMaterial 
-        map={texture}
-        transparent
-        alphaTest={0.1}
-      />
+      <meshPhongMaterial map={texture} transparent alphaTest={0.1} />
     </Sphere>
   )
 }
@@ -67,7 +65,9 @@ export function Advanced3DMemoji() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0, z: 0 })
 
-  const texture = useTexture('https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png')
+  const texture = useTexture(
+    'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png'
+  )
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -76,13 +76,13 @@ export function Advanced3DMemoji() {
       const y = ((event.clientY - rect.height / 2) / rect.height) * 2
 
       setMousePosition({ x, y })
-      
+
       // Calculate head rotation based on mouse position
       const maxRotation = Math.PI / 4 // 45 degrees max
       setTargetRotation({
         x: -y * maxRotation * 0.5, // Look up/down
         y: x * maxRotation, // Look left/right
-        z: x * maxRotation * 0.2 // Slight head tilt
+        z: x * maxRotation * 0.2, // Slight head tilt
       })
     }
 
@@ -90,7 +90,7 @@ export function Advanced3DMemoji() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (groupRef.current && headRef.current) {
       // Smooth head rotation
       headRef.current.rotation.x = THREE.MathUtils.lerp(
@@ -114,7 +114,8 @@ export function Advanced3DMemoji() {
       groupRef.current.scale.setScalar(breathe)
 
       // Subtle floating
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 1.5) * 0.1
+      groupRef.current.position.y =
+        Math.sin(state.clock.elapsedTime * 1.5) * 0.1
     }
   })
 
@@ -123,7 +124,7 @@ export function Advanced3DMemoji() {
       {/* Main Head */}
       <mesh ref={headRef} position={[0, 0, 0]} castShadow receiveShadow>
         <sphereGeometry args={[1.2, 32, 32]} />
-        <meshPhongMaterial 
+        <meshPhongMaterial
           map={texture}
           transparent
           alphaTest={0.1}
@@ -141,13 +142,21 @@ export function Advanced3DMemoji() {
           <sphereGeometry args={[0.15, 16, 16]} />
           <meshPhongMaterial color="#ffffff" />
         </mesh>
-        
+
         {/* Pupils that track mouse */}
-        <mesh position={[-0.3 + mousePosition.x * 0.05, mousePosition.y * 0.05, 0.1]}>
+        <mesh
+          position={[
+            -0.3 + mousePosition.x * 0.05,
+            mousePosition.y * 0.05,
+            0.1,
+          ]}
+        >
           <sphereGeometry args={[0.08, 16, 16]} />
           <meshPhongMaterial color="#333333" />
         </mesh>
-        <mesh position={[0.3 + mousePosition.x * 0.05, mousePosition.y * 0.05, 0.1]}>
+        <mesh
+          position={[0.3 + mousePosition.x * 0.05, mousePosition.y * 0.05, 0.1]}
+        >
           <sphereGeometry args={[0.08, 16, 16]} />
           <meshPhongMaterial color="#333333" />
         </mesh>
@@ -180,13 +189,18 @@ export function LayeredFaceMemoji() {
   const { gl } = useThree()
 
   // Base face texture (front-facing)
-  const faceTexture = useTexture('https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png')
+  const faceTexture = useTexture(
+    'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png'
+  )
 
   // Improve texture quality and color
   useEffect(() => {
     if (faceTexture) {
       faceTexture.colorSpace = THREE.SRGBColorSpace
-      faceTexture.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy?.() ?? 8)
+      faceTexture.anisotropy = Math.min(
+        8,
+        gl.capabilities.getMaxAnisotropy?.() ?? 8
+      )
       faceTexture.generateMipmaps = true
       faceTexture.minFilter = THREE.LinearMipmapLinearFilter
       faceTexture.magFilter = THREE.LinearFilter
@@ -196,7 +210,9 @@ export function LayeredFaceMemoji() {
 
   // Maintain correct aspect ratio of the PNG
   const aspect = useMemo<number>(() => {
-    const tex = faceTexture as unknown as { image?: { width?: number; height?: number } }
+    const tex = faceTexture as unknown as {
+      image?: { width?: number; height?: number }
+    }
     const img = tex?.image
     if (!img || !img.width || !img.height) return 1
     return img.height / img.width
@@ -213,13 +229,21 @@ export function LayeredFaceMemoji() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (!groupRef.current) return
     // Subtle, front-facing tilt only
     const targetX = mousePosition.y * 0.05
     const targetY = mousePosition.x * 0.05
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetX, 0.1)
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetY, 0.1)
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetX,
+      0.1
+    )
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetY,
+      0.1
+    )
     // Gentle float
     groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 1.5) * 0.05
   })

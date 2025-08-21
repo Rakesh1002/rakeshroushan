@@ -64,27 +64,26 @@ export async function POST(request: NextRequest) {
 
     // Check if OpenAI API key is configured
     if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { 
-          response: "I'm currently experiencing technical difficulties with the chat. Please use the contact form to reach me directly!",
-          shouldShowContact: false
-        }
-      )
+      return NextResponse.json({
+        response:
+          "I'm currently experiencing technical difficulties with the chat. Please use the contact form to reach me directly!",
+        shouldShowContact: false,
+      })
     }
 
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       {
         role: 'system',
-        content: RAKESH_CONTEXT
+        content: RAKESH_CONTEXT,
       },
-      ...conversationHistory.map((msg: {role: string, content: string}) => ({
+      ...conversationHistory.map((msg: { role: string; content: string }) => ({
         role: msg.role as 'user' | 'assistant',
-        content: msg.content
+        content: msg.content,
       })),
       {
         role: 'user',
-        content: message
-      }
+        content: message,
+      },
     ]
 
     const completion = await openai.chat.completions.create({
@@ -93,34 +92,46 @@ export async function POST(request: NextRequest) {
       max_tokens: 1000,
       temperature: 0.7,
       presence_penalty: 0.1,
-      frequency_penalty: 0.1
+      frequency_penalty: 0.1,
     })
 
-    const response = completion.choices[0]?.message?.content || 
+    const response =
+      completion.choices[0]?.message?.content ||
       "I'm sorry, I couldn't process that right now. Could you try asking again?"
 
     // Check if user message indicates interest in connecting/hiring
     const contactKeywords = [
-      'hire', 'job', 'opportunity', 'work together', 'collaborate',
-      'contact', 'reach out', 'connect', 'email', 'meeting',
-      'project', 'consulting', 'available', 'interested'
+      'hire',
+      'job',
+      'opportunity',
+      'work together',
+      'collaborate',
+      'contact',
+      'reach out',
+      'connect',
+      'email',
+      'meeting',
+      'project',
+      'consulting',
+      'available',
+      'interested',
     ]
-    
-    const shouldShowContact = contactKeywords.some(keyword => 
+
+    const shouldShowContact = contactKeywords.some(keyword =>
       message.toLowerCase().includes(keyword)
     )
 
     return NextResponse.json({
       response,
-      shouldShowContact
+      shouldShowContact,
     })
-
   } catch (error) {
     console.error('Chat API Error:', error)
     return NextResponse.json(
-      { 
-        response: "I'm experiencing some technical difficulties right now. Feel free to reach out directly through the contact form!",
-        shouldShowContact: true
+      {
+        response:
+          "I'm experiencing some technical difficulties right now. Feel free to reach out directly through the contact form!",
+        shouldShowContact: true,
       },
       { status: 500 }
     )

@@ -1,12 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
   transpilePackages: ['three'],
-  webpack: (config) => {
+  webpack: config => {
     config.externals.push({
       'utf-8-validate': 'commonjs utf-8-validate',
-      'bufferutil': 'commonjs bufferutil',
+      bufferutil: 'commonjs bufferutil',
     })
     return config
   },
@@ -21,7 +21,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_SITE_URL?.replace(/https?:\/\//, '') || 'localhost',
+        hostname:
+          process.env.NEXT_PUBLIC_SITE_URL?.replace(/https?:\/\//, '') ||
+          'localhost',
         pathname: '/media/**',
       },
     ],
@@ -41,6 +43,10 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow',
+          },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
@@ -73,6 +79,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/api/(.*)',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+      {
         source: '/robots.txt',
         headers: [
           {
@@ -92,6 +107,6 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-};
+}
 
-export default withPayload(nextConfig);
+export default withPayload(nextConfig)

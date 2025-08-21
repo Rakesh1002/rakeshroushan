@@ -9,8 +9,10 @@ export const Subscribers: CollectionConfig = {
   },
   access: {
     create: () => true, // Allow anyone to subscribe
-    read: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
-    update: ({ req: { user } }) => Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    read: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
+    update: ({ req: { user } }) =>
+      Boolean(user?.role === 'admin' || user?.role === 'editor'),
     delete: ({ req: { user } }) => Boolean(user?.role === 'admin'),
   },
   fields: [
@@ -75,7 +77,7 @@ export const Subscribers: CollectionConfig = {
         date: {
           pickerAppearance: 'dayAndTime',
         },
-        condition: (data) => data.status === 'unsubscribed',
+        condition: data => data.status === 'unsubscribed',
       },
     },
     {
@@ -161,7 +163,7 @@ export const Subscribers: CollectionConfig = {
             console.error('Failed to send welcome email:', error)
           }
         }
-        
+
         if (operation === 'update' && doc.status === 'unsubscribed') {
           // Update unsubscribed date
           if (!doc.unsubscribedAt) {
@@ -169,7 +171,7 @@ export const Subscribers: CollectionConfig = {
               collection: 'subscribers',
               id: doc.id,
               data: {
-                unsubscribedAt: new Date(),
+                unsubscribedAt: new Date().toISOString(),
               },
             })
           }

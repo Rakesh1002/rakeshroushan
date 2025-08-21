@@ -13,7 +13,7 @@ export async function getPublishedPosts(limit = 10) {
   const payload = await getPayload({
     config: configPromise,
   })
-  
+
   return await payload.find({
     collection: 'posts',
     where: {
@@ -30,7 +30,7 @@ export async function getPostBySlug(slug: string) {
   const payload = await getPayload({
     config: configPromise,
   })
-  
+
   const result = await payload.find({
     collection: 'posts',
     where: {
@@ -51,7 +51,7 @@ export async function getFeaturedPosts() {
   const payload = await getPayload({
     config: configPromise,
   })
-  
+
   return await payload.find({
     collection: 'posts',
     where: {
@@ -67,12 +67,16 @@ export async function getFeaturedPosts() {
   })
 }
 
-export async function subscribeToNewsletter(email: string, firstName?: string, source = 'blog') {
+export async function subscribeToNewsletter(
+  email: string,
+  firstName?: string,
+  source: 'blog' | 'contact' | 'other' | 'popup' | 'social' = 'blog'
+) {
   try {
     const payload = await getPayload({
       config: configPromise,
     })
-    
+
     const result = await payload.create({
       collection: 'subscribers',
       data: {
@@ -83,10 +87,12 @@ export async function subscribeToNewsletter(email: string, firstName?: string, s
       },
     })
     return { success: true, data: result }
-  } catch (error: any) {
-    if (error.message?.includes('duplicate key')) {
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error'
+    if (errorMessage.includes('duplicate key')) {
       return { success: false, error: 'Email already subscribed' }
     }
-    return { success: false, error: error.message }
+    return { success: false, error: errorMessage }
   }
 }

@@ -17,7 +17,7 @@ export function MemojiScene({ className }: MemojiSceneProps) {
           position: [0, 0, 5],
           fov: 50,
           near: 0.1,
-          far: 100
+          far: 100,
         }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
@@ -33,12 +33,12 @@ export function MemojiScene({ className }: MemojiSceneProps) {
             shadow-mapSize-height={1024}
           />
           <pointLight position={[-5, 5, 5]} intensity={0.3} color="#6366f1" />
-          
+
           {/* Front-facing memoji for clean look */}
           <group scale={[1.6, 1.6, 1.6]} position={[0, 0, 0]}>
             <LayeredFaceMemoji />
           </group>
-          
+
           {/* Optional: Add controls for debugging */}
           {/* <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} /> */}
         </Suspense>

@@ -26,7 +26,9 @@ export function MouseInteractiveStars() {
   })
 
   // Generate star positions
-  const positions = new Float32Array(Array.from({ length: 450 }, () => (Math.random() - 0.5) * 40))
+  const positions = new Float32Array(
+    Array.from({ length: 450 }, () => (Math.random() - 0.5) * 40)
+  )
 
   return (
     <points ref={pointsRef}>
@@ -36,6 +38,7 @@ export function MouseInteractiveStars() {
           count={150}
           array={positions}
           itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -63,11 +66,11 @@ export function FloatingOrbs() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (orbsRef.current) {
       orbsRef.current.rotation.y = mouseRef.current.x * 0.05
       orbsRef.current.rotation.x = mouseRef.current.y * 0.03
-      
+
       // Gentle floating animation
       orbsRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2
     }
@@ -77,38 +80,22 @@ export function FloatingOrbs() {
     <group ref={orbsRef}>
       <mesh position={[8, 4, -12]}>
         <sphereGeometry args={[2.5, 32, 32]} />
-        <meshBasicMaterial
-          color="#6366f1"
-          transparent
-          opacity={0.3}
-        />
+        <meshBasicMaterial color="#6366f1" transparent opacity={0.3} />
       </mesh>
 
       <mesh position={[-6, -2, -10]}>
         <sphereGeometry args={[1.8, 32, 32]} />
-        <meshBasicMaterial
-          color="#8b5cf6"
-          transparent
-          opacity={0.4}
-        />
+        <meshBasicMaterial color="#8b5cf6" transparent opacity={0.4} />
       </mesh>
 
       <mesh position={[4, -4, -8]}>
         <sphereGeometry args={[1.2, 32, 32]} />
-        <meshBasicMaterial
-          color="#ec4899"
-          transparent
-          opacity={0.35}
-        />
+        <meshBasicMaterial color="#ec4899" transparent opacity={0.35} />
       </mesh>
 
       <mesh position={[-8, 3, -15]}>
         <sphereGeometry args={[1.5, 32, 32]} />
-        <meshBasicMaterial
-          color="#10b981"
-          transparent
-          opacity={0.3}
-        />
+        <meshBasicMaterial color="#10b981" transparent opacity={0.3} />
       </mesh>
     </group>
   )

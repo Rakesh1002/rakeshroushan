@@ -49,10 +49,11 @@ export function InteractiveStars() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (pointsRef.current) {
-      const positions = pointsRef.current.geometry.attributes.position.array as Float32Array
-      
+      const positions = pointsRef.current.geometry.attributes.position
+        .array as Float32Array
+
       // Create parallax effect based on mouse position
       const mouseInfluence = 0.1
       pointsRef.current.rotation.x = mouseRef.current.y * mouseInfluence
@@ -98,7 +99,7 @@ export function CelestialOrbs() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (orbsRef.current) {
       // Mouse parallax effect
       orbsRef.current.rotation.y = mouseRef.current.x * 0.05
@@ -174,12 +175,12 @@ export function ConstellationLines() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame((state) => {
+  useFrame(state => {
     if (linesRef.current) {
       // Gentle rotation based on mouse
       linesRef.current.rotation.x = mousePosition.y * 0.02
       linesRef.current.rotation.y = mousePosition.x * 0.02
-      
+
       // Breathing effect
       const scale = 1 + Math.sin(state.clock.elapsedTime * 0.5) * 0.02
       linesRef.current.scale.setScalar(scale)
@@ -188,29 +189,29 @@ export function ConstellationLines() {
 
   // Create constellation lines
   const lines = useMemo(() => {
-    const lineGeometries = []
-    
+    const lineGeometries: THREE.BufferGeometry[] = []
+
     // Define some constellation points
     const constellations = [
       [
         new THREE.Vector3(-5, 3, -2),
         new THREE.Vector3(-3, 4, -2),
         new THREE.Vector3(-1, 3, -2),
-        new THREE.Vector3(1, 5, -2)
+        new THREE.Vector3(1, 5, -2),
       ],
       [
         new THREE.Vector3(3, -2, -3),
         new THREE.Vector3(5, -1, -3),
         new THREE.Vector3(6, -3, -3),
-        new THREE.Vector3(4, -4, -3)
-      ]
+        new THREE.Vector3(4, -4, -3),
+      ],
     ]
 
     constellations.forEach(constellation => {
       for (let i = 0; i < constellation.length - 1; i++) {
         const geometry = new THREE.BufferGeometry().setFromPoints([
           constellation[i],
-          constellation[i + 1]
+          constellation[i + 1],
         ])
         lineGeometries.push(geometry)
       }
@@ -222,14 +223,19 @@ export function ConstellationLines() {
   return (
     <group ref={linesRef}>
       {lines.map((geometry, index) => (
-        <line key={index} geometry={geometry}>
-          <lineBasicMaterial
-            color="#ffffff"
-            transparent
-            opacity={0.6}
-            linewidth={2}
-          />
-        </line>
+        <primitive
+          key={index}
+          object={
+            new THREE.Line(
+              geometry,
+              new THREE.LineBasicMaterial({
+                color: '#ffffff',
+                transparent: true,
+                opacity: 0.6,
+              })
+            )
+          }
+        />
       ))}
     </group>
   )
@@ -250,28 +256,32 @@ export function ShootingStars() {
             Math.random() * 20 - 10,
             -5
           )
-          
+
           // Animate across the sky
-          gsap.fromTo(star.position, 
+          gsap.fromTo(
+            star.position,
             { x: star.position.x, y: star.position.y },
             {
               x: star.position.x + (Math.random() * 20 - 10),
               y: star.position.y - (Math.random() * 10 + 5),
               duration: Math.random() * 3 + 2,
-              ease: "power2.out",
+              ease: 'power2.out',
               onComplete: () => {
                 // Reset for next animation
                 setTimeout(createShootingStar, Math.random() * 5000 + 2000)
-              }
+              },
             }
           )
 
-          gsap.fromTo(star.scale,
+          gsap.fromTo(
+            star.scale,
             { x: 0, y: 0, z: 0 },
             {
-              x: 1, y: 1, z: 1,
+              x: 1,
+              y: 1,
+              z: 1,
               duration: 0.3,
-              ease: "power2.out"
+              ease: 'power2.out',
             }
           )
         }
@@ -284,10 +294,10 @@ export function ShootingStars() {
 
   return (
     <group ref={starsRef}>
-      {[0, 1, 2].map((i) => (
+      {[0, 1, 2].map(i => (
         <mesh key={i} scale={[0, 0, 0]}>
           <sphereGeometry args={[0.02, 8, 8]} />
-          <meshBasicMaterial
+          <meshPhongMaterial
             color="#ffffff"
             emissive="#ffffff"
             emissiveIntensity={0.5}

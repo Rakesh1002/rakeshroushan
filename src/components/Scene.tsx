@@ -3,7 +3,11 @@
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
-import { FlyingStarfield, SpeedLines, DistantNebula } from './3d/FlyingStarfield'
+import {
+  FlyingStarfield,
+  SpeedLines,
+  DistantNebula,
+} from './3d/FlyingStarfield'
 
 interface SceneProps {
   className?: string
@@ -17,28 +21,28 @@ export function Scene({ className }: SceneProps) {
           position: [0, 0, 8],
           fov: 60,
           near: 0.1,
-          far: 200
+          far: 200,
         }}
         dpr={[1, 2]}
-        gl={{ 
-          antialias: true, 
+        gl={{
+          antialias: true,
           alpha: true,
           premultipliedAlpha: false,
-          preserveDrawingBuffer: true
+          preserveDrawingBuffer: true,
         }}
-        style={{ 
+        style={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          zIndex: 0
+          zIndex: 0,
         }}
       >
         <Suspense fallback={null}>
           {/* Minimal lighting for space */}
           <ambientLight intensity={0.3} />
-          
+
           {/* Flying Through Space */}
           <FlyingStarfield />
           <SpeedLines />

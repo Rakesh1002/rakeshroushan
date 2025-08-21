@@ -18,13 +18,17 @@ interface FormData {
   type: 'collaboration' | 'hiring' | 'consultation' | 'other'
 }
 
-export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactModalProps) {
+export function ContactModal({
+  isOpen,
+  onClose,
+  initialMessage = '',
+}: ContactModalProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     company: '',
     message: initialMessage,
-    type: 'other'
+    type: 'other',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -43,7 +47,7 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
         body: JSON.stringify({
           ...formData,
           timestamp: new Date().toISOString(),
-          source: 'chat_interface'
+          source: 'chat_interface',
         }),
       })
 
@@ -57,7 +61,7 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
             email: '',
             company: '',
             message: '',
-            type: 'other'
+            type: 'other',
           })
         }, 2000)
       } else {
@@ -71,10 +75,14 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
     }
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }))
   }
 
@@ -85,39 +93,42 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl"
+            onClick={e => e.stopPropagation()}
           >
             {!isSubmitted ? (
               <>
                 {/* Header */}
                 <div className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-4 text-white">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Let's Connect!</h2>
+                    <h2 className="text-xl font-semibold">
+                      Let&apos;s Connect!
+                    </h2>
                     <button
                       onClick={onClose}
-                      className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                      className="rounded-full p-1 transition-colors hover:bg-white/20"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="h-5 w-5" />
                     </button>
                   </div>
-                  <p className="text-purple-100 text-sm mt-1">
-                    I'd love to hear from you. Let's discuss opportunities!
+                  <p className="mt-1 text-sm text-purple-100">
+                    I&apos;d love to hear from you. Let&apos;s discuss
+                    opportunities!
                   </p>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 p-6">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="mb-1 block text-sm font-medium text-gray-700">
                         Name *
                       </label>
                       <input
@@ -126,12 +137,12 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 transition-colors outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="mb-1 block text-sm font-medium text-gray-700">
                         Email *
                       </label>
                       <input
@@ -140,14 +151,14 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 transition-colors outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
                         placeholder="your@email.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-700">
                       Company/Organization
                     </label>
                     <input
@@ -155,31 +166,35 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 transition-colors outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
                       placeholder="Your company"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      What's this about? *
+                    <label className="mb-1 block text-sm font-medium text-gray-700">
+                      What&apos;s this about? *
                     </label>
                     <select
                       name="type"
                       required
                       value={formData.type}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 transition-colors outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
                     >
                       <option value="other">General Inquiry</option>
-                      <option value="collaboration">Collaboration Opportunity</option>
+                      <option value="collaboration">
+                        Collaboration Opportunity
+                      </option>
                       <option value="hiring">Job/Hiring Opportunity</option>
-                      <option value="consultation">Consultation/Advisory</option>
+                      <option value="consultation">
+                        Consultation/Advisory
+                      </option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-700">
                       Message *
                     </label>
                     <textarea
@@ -188,7 +203,7 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors resize-none"
+                      className="w-full resize-none rounded-lg border border-gray-300 px-3 py-2 transition-colors outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
                       placeholder="Tell me about your project, opportunity, or how I can help..."
                     />
                   </div>
@@ -196,16 +211,16 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 rounded-lg hover:from-purple-700 hover:to-blue-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50"
+                    className="flex w-full items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-3 text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin" />
                         <span>Sending...</span>
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
+                        <Send className="h-4 w-4" />
                         <span>Send Message</span>
                       </>
                     )}
@@ -214,14 +229,27 @@ export function ContactModal({ isOpen, onClose, initialMessage = '' }: ContactMo
               </>
             ) : (
               <div className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <svg
+                    className="h-8 w-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
+                <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                  Message Sent!
+                </h3>
                 <p className="text-gray-600">
-                  Thanks for reaching out! I'll get back to you within 24 hours.
+                  Thanks for reaching out! I&apos;ll get back to you within 24
+                  hours.
                 </p>
               </div>
             )}

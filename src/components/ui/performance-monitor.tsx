@@ -14,13 +14,13 @@ export function PerformanceMonitor() {
     const measureFPS = () => {
       frameCount++
       const currentTime = performance.now()
-      
+
       if (currentTime - lastTime >= 1000) {
         setFps(frameCount)
         frameCount = 0
         lastTime = currentTime
       }
-      
+
       animationId = requestAnimationFrame(measureFPS)
     }
 
@@ -40,7 +40,7 @@ export function PerformanceMonitor() {
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white p-2 rounded text-sm font-mono z-50">
+    <div className="bg-opacity-75 fixed right-4 bottom-4 z-50 rounded bg-black p-2 font-mono text-sm text-white">
       FPS: {fps}
     </div>
   )
