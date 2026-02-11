@@ -1,0 +1,350 @@
+# RR Holdings - Global Cursor Rules
+
+# 100 Startups in 100 Days Infrastructure
+
+You are an expert full-stack developer helping build a portfolio of 100 startups.
+Follow these rules strictly for all code generation.
+
+## Tech Stack
+
+### Frontend (Web)
+
+- **Framework**: Next.js 14+ with App Router
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **State**: Zustand for client state, TanStack Query for server state
+- **Forms**: React Hook Form + Zod validation
+
+### Backend
+
+- **API**: Next.js API Routes or Cloudflare Workers (Hono framework)
+- **Python Services**: FastAPI for AI/ML backends
+- **Edge Functions**: Cloudflare Workers for low-latency operations
+
+### Database & Storage
+
+- **Primary DB**: Cloudflare D1 (SQLite) for simple apps
+- **Scalable DB**: Supabase PostgreSQL or PlanetScale MySQL
+- **Cache**: Cloudflare KV or Upstash Redis
+- **Object Storage**: Cloudflare R2 (S3-compatible)
+- **ORM**: Drizzle ORM (preferred) or Prisma
+
+### Authentication
+
+- **Primary**: Clerk (fastest to implement)
+- **Alternative**: NextAuth.js v5 or Supabase Auth
+- **Session**: JWT with httpOnly cookies
+
+### Payments
+
+- **Primary**: Stripe (international)
+- **Alternative**: Lemon Squeezy (for simplicity)
+- **India**: Razorpay for INR transactions
+
+### AI/ML Infrastructure
+
+- **LLM Provider**: OpenAI API, Anthropic Claude, or Groq
+- **GPU Compute**: Modal for inference and training
+- **Embeddings**: OpenAI text-embedding-3-small or Cohere
+- **Vector DB**: Pinecone, Qdrant, or Cloudflare Vectorize
+
+### Deployment
+
+- **Web Apps**: Cloudflare Pages (primary) or Vercel
+- **Backend Services**: DigitalOcean App Platform or Droplets
+- **GPU Workloads**: Modal
+- **Domains**: Cloudflare Registrar
+
+### Monitoring & Analytics
+
+- **Analytics**: PostHog (self-hosted) or Plausible
+- **Error Tracking**: Sentry
+- **Logs**: Axiom or Logtail
+- **Uptime**: BetterStack or UptimeRobot
+
+## Code Style & Conventions
+
+### File Structure (Next.js)
+
+```
+src/
+├── app/                    # App Router pages
+│   ├── (auth)/            # Auth route group
+│   ├── (dashboard)/       # Protected routes
+│   ├── api/               # API routes
+│   └── layout.tsx
+├── components/
+│   ├── ui/                # shadcn/ui components
+│   ├── forms/             # Form components
+│   └── [feature]/         # Feature-specific components
+├── lib/
+│   ├── db/                # Database client & schemas
+│   ├── auth/              # Auth utilities
+│   ├── api/               # API client functions
+│   └── utils.ts           # Helper functions
+├── hooks/                  # Custom React hooks
+├── stores/                 # Zustand stores
+└── types/                  # TypeScript types
+```
+
+### Naming Conventions
+
+- **Files**: kebab-case (e.g., `user-profile.tsx`)
+- **Components**: PascalCase (e.g., `UserProfile`)
+- **Functions**: camelCase (e.g., `getUserProfile`)
+- **Constants**: SCREAMING_SNAKE_CASE (e.g., `MAX_FILE_SIZE`)
+- **Types/Interfaces**: PascalCase with descriptive names (e.g., `UserProfileData`)
+
+### Component Guidelines
+
+```typescript
+// Prefer functional components with TypeScript
+interface ButtonProps {
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+export function Button({
+  variant = "primary",
+  size = "md",
+  children,
+  onClick,
+  disabled,
+  loading,
+}: ButtonProps) {
+  // Implementation
+}
+```
+
+### API Route Pattern
+
+```typescript
+// app/api/users/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+
+const createUserSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2),
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const validated = createUserSchema.parse(body);
+
+    // Business logic here
+
+    return NextResponse.json({ success: true, data: result });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { success: false, error: error.errors },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+```
+
+### Database Schema (Drizzle)
+
+```typescript
+// lib/db/schema.ts
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { createId } from "@paralleldrive/cuid2";
+
+export const users = sqliteTable("users", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  email: text("email").notNull().unique(),
+  name: text("name").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
+    () => new Date()
+  ),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+    () => new Date()
+  ),
+});
+```
+
+## Speed & Performance Rules
+
+### MVP Development Speed
+
+1. **Use shadcn/ui** - Don't build UI components from scratch
+2. **Use Clerk** - Don't build auth from scratch
+3. **Use Stripe** - Don't build payments from scratch
+4. **Copy patterns** - Reuse code from previous projects
+5. **AI-first** - Use AI for boilerplate, focus on business logic
+
+### Performance Checklist
+
+- [ ] Images: Use `next/image` with WebP/AVIF
+- [ ] Fonts: Use `next/font` with font-display: swap
+- [ ] Bundle: Dynamic imports for heavy components
+- [ ] API: Cache responses with appropriate headers
+- [ ] DB: Add indexes for frequently queried columns
+
+### Security Checklist
+
+- [ ] Validate all inputs with Zod
+- [ ] Sanitize user-generated content
+- [ ] Use parameterized queries (ORMs handle this)
+- [ ] Set secure cookie flags (httpOnly, sameSite, secure)
+- [ ] Implement rate limiting on API routes
+- [ ] Use HTTPS everywhere
+- [ ] Store secrets in environment variables
+
+## Project-Specific Patterns
+
+### SaaS Subscription Pattern
+
+```typescript
+// Stripe webhook handler pattern
+export async function handleStripeWebhook(event: Stripe.Event) {
+  switch (event.type) {
+    case "checkout.session.completed":
+      await handleCheckoutComplete(event.data.object);
+      break;
+    case "customer.subscription.updated":
+      await handleSubscriptionUpdate(event.data.object);
+      break;
+    case "customer.subscription.deleted":
+      await handleSubscriptionCanceled(event.data.object);
+      break;
+  }
+}
+```
+
+### AI Integration Pattern
+
+```typescript
+// Modal GPU inference pattern
+import { OpenAI } from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export async function generateWithAI(prompt: string) {
+  const response = await client.chat.completions.create({
+    model: "gpt-4-turbo-preview",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.7,
+    max_tokens: 1000,
+  });
+
+  return response.choices[0].message.content;
+}
+```
+
+### Error Handling Pattern
+
+```typescript
+// Custom error classes
+export class AppError extends Error {
+  constructor(
+    message: string,
+    public statusCode: number = 500,
+    public code?: string
+  ) {
+    super(message);
+    this.name = "AppError";
+  }
+}
+
+export class ValidationError extends AppError {
+  constructor(message: string) {
+    super(message, 400, "VALIDATION_ERROR");
+  }
+}
+
+export class AuthenticationError extends AppError {
+  constructor(message: string = "Unauthorized") {
+    super(message, 401, "AUTHENTICATION_ERROR");
+  }
+}
+```
+
+## Launch Checklist Integration
+
+Before shipping any startup:
+
+1. [ ] Core feature works end-to-end
+2. [ ] Auth flow complete (signup, login, logout)
+3. [ ] Payment integration tested with Stripe test mode
+4. [ ] Error boundaries in place
+5. [ ] Basic SEO (title, description, OG tags)
+6. [ ] Analytics tracking added
+7. [ ] Terms of Service and Privacy Policy linked
+8. [ ] Responsive design verified
+9. [ ] Loading states for all async operations
+10. [ ] 404 and error pages styled
+
+## Environment Variables Template
+
+```env
+# App
+NEXT_PUBLIC_APP_URL=https://example.com
+NODE_ENV=production
+
+# Database
+DATABASE_URL=
+
+# Auth (Clerk)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+# Payments (Stripe)
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+
+# AI
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+
+# Storage (Cloudflare R2)
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+R2_BUCKET_NAME=
+R2_ENDPOINT=
+
+# Analytics
+NEXT_PUBLIC_POSTHOG_KEY=
+NEXT_PUBLIC_POSTHOG_HOST=
+```
+
+## Quick Commands
+
+```bash
+# Create new Next.js project
+npx create-next-app@latest my-app --typescript --tailwind --eslint --app --src-dir
+
+# Add shadcn/ui
+npx shadcn@latest init
+
+# Add common shadcn components
+npx shadcn@latest add button card input form dialog toast
+
+# Add Drizzle
+npm install drizzle-orm
+npm install -D drizzle-kit
+
+# Deploy to Cloudflare Pages
+npx wrangler pages deploy .next
+```
+
+---
+
+Remember: Ship fast, iterate faster. Perfect is the enemy of shipped.

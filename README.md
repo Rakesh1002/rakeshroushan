@@ -1,177 +1,194 @@
-# Rakesh Roushan - 3D Portfolio Website
+# RR Holdings - Rakesh Roushan
 
-A superfast, responsive personal portfolio website built with Three.js, Next.js 15, and modern web technologies. This portfolio showcases Rakesh Roushan's work as a Founder, Product Manager, and Marketer with immersive 3D animations and smooth interactions.
+> 100 Startups in 100 Days | $100,000 MRR Target | Portfolio Website + Strategy Hub
 
-## ✨ Features
-
-- **🎯 Modern Design**: Clean, professional design with stunning 3D elements
-- **⚡ Superfast Performance**: Optimized with Next.js 15, Turbopack, and advanced performance techniques
-- **📱 Fully Responsive**: Perfect experience across all devices and screen sizes
-- **🎨 3D Animations**: Interactive Three.js scenes with floating objects and particle effects
-- **🚀 Smooth Scrolling**: Framer Motion powered animations and scroll interactions
-- **🔗 Real Projects**: Direct integration with GitHub projects and LinkedIn profile
-- **🎭 Interactive Elements**: Hover effects, smooth transitions, and engaging micro-interactions
-- **💼 Professional Showcase**: Tailored for entrepreneurial and product management expertise
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 15 with App Router
-- **Styling**: Tailwind CSS 4 + Shadcn/ui components
-- **3D Graphics**: Three.js + React Three Fiber + React Three Drei
-- **Animations**: Framer Motion + GSAP
-- **Language**: TypeScript
-- **Performance**: Advanced optimizations and code splitting
-- **Package Manager**: pnpm
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm (recommended) or npm/yarn
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/Rakesh1002/portfolio
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Run the development server**
-
-   ```bash
-   pnpm dev
-   ```
-
-4. **Open your browser**
-   Visit [http://localhost:3000](http://localhost:3000) to see the portfolio
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                 # Next.js app directory
-│   ├── globals.css     # Global styles
-│   ├── layout.tsx      # Root layout
-│   └── page.tsx        # Main page
-├── components/         # React components
-│   ├── 3d/            # Three.js 3D components
-│   ├── sections/      # Page sections (Hero, About, Projects, Contact)
-│   ├── ui/            # Reusable UI components
-│   ├── Navigation.tsx # Main navigation
-│   └── Scene.tsx      # Main 3D scene
-├── hooks/             # Custom React hooks
-└── lib/               # Utility functions
-```
-
-## 🎨 Customization
-
-### Personal Information
-
-Update the content in the section components:
-
-- `src/components/sections/Hero.tsx` - Name and title
-- `src/components/sections/About.tsx` - Bio and skills
-- `src/components/sections/Projects.tsx` - Portfolio projects
-- `src/components/sections/Contact.tsx` - Contact information
-
-### 3D Scene
-
-Modify the 3D elements in:
-
-- `src/components/Scene.tsx` - Main scene setup
-- `src/components/3d/` - Individual 3D objects
-
-### Styling
-
-- Colors and theme: `src/app/globals.css`
-- Component styles: Individual component files with Tailwind CSS
-
-## 🔧 Performance Optimizations
-
-- **Image Optimization**: Next.js Image component with lazy loading
-- **Code Splitting**: Automatic route-based splitting
-- **3D Scene Optimization**: Efficient rendering and LOD techniques
-- **Bundle Analysis**: Webpack optimization for Three.js
-- **Caching**: Advanced caching strategies
-
-## 📱 Responsive Design
-
-- **Mobile First**: Optimized for mobile devices
-- **Tablet Support**: Enhanced tablet experience
-- **Desktop**: Full feature desktop experience
-- **Touch Interactions**: Gesture-friendly 3D controls
-
-## 🔗 Live Projects Integration
-
-The portfolio automatically pulls data from:
-
-- **GitHub**: [Rakesh1002](https://github.com/Rakesh1002/) repositories
-- **LinkedIn**: [rakeshroushan1002](https://www.linkedin.com/in/rakeshroushan1002/) profile
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-```bash
-pnpm build
-```
-
-Then deploy to [Vercel](https://vercel.com)
-
-### Other Platforms
-
-The build output is compatible with any static hosting service:
-
-```bash
-pnpm build
-pnpm export  # For static export if needed
-```
-
-## 📈 Performance Metrics
-
-- **Lighthouse Score**: 95+ across all metrics
-- **Core Web Vitals**: Optimized for excellent user experience
-- **Bundle Size**: Minimal JavaScript payload
-- **Loading Speed**: Sub-2 second first paint
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👨‍💻 About Rakesh Roushan
-
-**Founder, AudioPod AI | Ex-Paytm, Ninjacart, Airtel**
-
-Multi-versatile, pragmatic, curious & result-oriented professional based in Bengaluru, India. Rakesh specializes in building and scaling technology-driven ventures, passionate about democratizing audio creation and knowledge access using AI.
-
-**Current Ventures:**
-
-- **AudioPod AI** (Oct 2024 - Present): Co-Founder creating AI-driven audio tools
-- **UnQuest AI** (Nov 2023 - Present): Founder building advanced knowledge management systems
-
-**Connect with Rakesh:**
-
-- **LinkedIn**: [rakeshroushan1002](https://www.linkedin.com/in/rakeshroushan1002/)
-- **GitHub**: [Rakesh1002](https://github.com/Rakesh1002/)
-- **Location**: Bengaluru, Karnataka, India
+This is the consolidated monorepo for RR Holdings, containing both the **3D portfolio website** and the **company/strategy documentation** for launching 100 startups in 100 days.
 
 ---
 
-Built with ❤️ using the latest web technologies
+## Portfolio Website
+
+A superfast, responsive personal portfolio website built with Three.js, Next.js 15, and modern web technologies. Features immersive 3D animations, AI-powered chat, Payload CMS blog, and smooth interactions.
+
+### Key Features
+
+- **3D Animations**: Interactive Three.js scenes with flying starfield and particle effects
+- **AI Chat**: OpenAI-powered conversational interface
+- **Blog/CMS**: Payload CMS with rich text editor, RSS feed
+- **Contact System**: Email notifications via Nodemailer
+- **GitHub Integration**: Dynamically fetches and displays repositories
+- **Newsletter**: Subscriber management via Payload CMS
+- **SEO Optimized**: Structured data, sitemaps, robots.txt
+- **Fully Responsive**: Mobile-first design across all devices
+
+### Tech Stack
+
+| Layer      | Technology                                          |
+| ---------- | --------------------------------------------------- |
+| Framework  | Next.js 15, React 19, TypeScript                    |
+| 3D         | Three.js, React Three Fiber, React Three Drei       |
+| Styling    | Tailwind CSS 4, Shadcn/ui, Framer Motion            |
+| CMS        | Payload CMS 3.50 (PostgreSQL)                       |
+| AI         | OpenAI GPT-4o-mini                                  |
+| Email      | Nodemailer (SMTP)                                   |
+| Package    | pnpm                                                |
+
+### Quick Start
+
+```bash
+pnpm install
+pnpm dev
+# Open http://localhost:3000
+```
+
+See [README.env.md](README.env.md) for required environment variables.
+
+---
+
+## Company & Legal Documentation
+
+Corporate structure, legal templates, and compliance documentation for the US-India holding company.
+
+```
+RR Holdings Inc. (Delaware C-Corp)
+├── All intellectual property
+├── Customer contracts & revenue (USD)
+└── 100% ownership of:
+    └── RR Tech Pvt Ltd (India)
+        ├── Development operations
+        ├── Contractor management
+        └── Local expenses (INR)
+```
+
+### Quick Links
+
+- [Corporate Structure](company/holding-structure.md)
+- [US Formation Guide](company/us-corp-formation.md)
+- [India Subsidiary Guide](company/india-subsidiary.md)
+- [Banking Setup](company/banking-setup.md)
+- [Compliance Calendar](company/compliance-calendar.md)
+- [IP Assignment](company/ip-assignment.md)
+
+### Legal Templates
+
+- [Independent Contractor Agreement](company/contractor-agreements/independent-contractor.md)
+- [NDA Template](company/contractor-agreements/nda-template.md)
+- [Terms of Service](company/terms-privacy/terms-of-service.md)
+- [Privacy Policy](company/terms-privacy/privacy-policy.md)
+
+---
+
+## Strategy & Execution
+
+Playbooks and frameworks for the 100-day sprint.
+
+- [100-Day Plan](strategy/100-day-plan.md) - Daily execution calendar
+- [Startup Portfolio](strategy/startup-portfolio.md) - All 30+ ideas organized
+- [Prioritization Matrix](strategy/prioritization-matrix.md) - ICE scoring
+- [Launch Checklist](strategy/launch-checklist.md) - Pre/during/post launch
+- [Growth Playbook](strategy/growth-playbook.md) - Acquisition & retention
+
+### Frameworks
+
+- [Idea Validation](strategy/frameworks/idea-validation.md) - 24-hour validation process
+- [Build-Measure-Learn](strategy/frameworks/build-measure-learn.md) - Lean startup loop
+- [Decision Matrix](strategy/frameworks/decision-matrix.md) - Build/scale/pivot/kill
+- [Time-Boxing](strategy/frameworks/time-boxing.md) - Shipping fast
+- [Automation-First](strategy/frameworks/automation-first.md) - CI/CD and operations
+
+---
+
+## Portfolio Overview
+
+### Tier 1: Revenue-Ready
+
+| Product   | Description                    | MRR Target |
+| --------- | ------------------------------ | ---------- |
+| AudioPod  | AI DAW for podcasts/audiobooks | $30k       |
+| UnQuest   | AI market research             | $20k       |
+| JEET      | JEE/NEET prep platform         | $15k       |
+| TeleStack | AI receptionist for healthcare | $10k       |
+
+See [startup-portfolio.md](strategy/startup-portfolio.md) for all 30+ ideas across Tier 2-4.
+
+---
+
+## Project Structure
+
+```
+.
+├── src/                        # Portfolio website source
+│   ├── app/                    # Next.js app directory
+│   │   ├── (payload)/          # Payload CMS admin & API
+│   │   ├── api/                # API routes (chat, contact, subscribe, github, rss)
+│   │   ├── blog/               # Blog pages
+│   │   ├── page.tsx            # Homepage
+│   │   └── layout.tsx          # Root layout
+│   ├── components/
+│   │   ├── 3d/                 # Three.js 3D components
+│   │   ├── sections/           # Page sections (Hero, About, Experience, Projects, Blog, Contact)
+│   │   └── ui/                 # Shadcn/ui components
+│   ├── collections/            # Payload CMS collections (Posts, Users, Subscribers, Media)
+│   ├── hooks/                  # Custom React hooks
+│   └── lib/                    # Utilities (payload, openai, utils)
+├── company/                    # Legal & corporate documentation
+│   ├── holding-structure.md
+│   ├── us-corp-formation.md
+│   ├── india-subsidiary.md
+│   ├── banking-setup.md
+│   ├── compliance-calendar.md
+│   ├── ip-assignment.md
+│   ├── contractor-agreements/
+│   └── terms-privacy/
+├── strategy/                   # Execution playbooks & frameworks
+│   ├── 100-day-plan.md
+│   ├── startup-portfolio.md
+│   ├── prioritization-matrix.md
+│   ├── launch-checklist.md
+│   ├── growth-playbook.md
+│   └── frameworks/
+├── public/                     # Static assets
+├── sample-blog-content/        # Sample blog posts
+├── .cursorrules                # AI coding guidelines
+├── .cursorignore               # AI context exclusions
+├── payload.config.ts           # Payload CMS config
+├── next.config.ts              # Next.js config
+└── package.json
+```
+
+---
+
+## Key Metrics
+
+| Metric            | Day 30 | Day 60  | Day 100  |
+| ----------------- | ------ | ------- | -------- |
+| Products Launched | 15     | 50      | 100      |
+| MRR               | $5,000 | $25,000 | $100,000 |
+| Paying Customers  | 100    | 500     | 2,000    |
+
+---
+
+## Key Principles
+
+1. **Ship fast** - Done is better than perfect
+2. **Revenue first** - Validate with payment, not signups
+3. **Automate everything** - CI/CD, monitoring, billing, support
+4. **Learn publicly** - Build in public for distribution
+5. **Kill fast** - 30 days without traction = kill
+
+---
+
+## About Rakesh Roushan
+
+**Founder, AudioPod AI & UnQuest AI | Ex-Paytm, Ninjacart, Airtel**
+
+Multi-versatile, pragmatic, curious & result-oriented professional based in Bengaluru, India. Specializes in building and scaling technology-driven ventures.
+
+- **Twitter**: [@rakeshroushan](https://twitter.com/rakeshroushan)
+- **LinkedIn**: [rakeshroushan1002](https://www.linkedin.com/in/rakeshroushan1002/)
+- **GitHub**: [Rakesh1002](https://github.com/Rakesh1002/)
+- **Email**: rakesh@rrholdings.com
+
+---
+
+**100 products. 100 days. $100k MRR. Let's build.**
