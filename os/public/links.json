@@ -1,0 +1,15 @@
+{
+  "name": "Rakesh Roushan",
+  "email": "replace-me@example.com",
+  "channels": {
+    "x": "https://x.com/replace-me",
+    "linkedin": "https://www.linkedin.com/in/replace-me/",
+    "youtube": "https://www.youtube.com/@replace-me",
+    "github": "https://github.com/replace-me"
+  },
+  "positioning": {
+    "one_liner": "I help founders and product leaders build AI-native products and scale execution using first-principles strategy, operating cadence, and compounding distribution."
+  }
+}
+
+

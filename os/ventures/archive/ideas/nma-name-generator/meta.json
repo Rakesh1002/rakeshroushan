@@ -1,0 +1,10 @@
+{
+  "code": "NMA",
+  "name": "Name Generator",
+  "slug": "nma-name-generator",
+  "one_liner": "Name generator",
+  "category": "naming",
+  "status": "idea",
+  "tier": "",
+  "owner": "rakesh"
+}

@@ -1,0 +1,10 @@
+{
+  "code": "AP-Publish",
+  "name": "Ebook publisher",
+  "slug": "ap-publish",
+  "one_liner": "Ebook publisher/publishing workflow",
+  "category": "media",
+  "status": "idea",
+  "tier": "",
+  "owner": "rakesh"
+}
