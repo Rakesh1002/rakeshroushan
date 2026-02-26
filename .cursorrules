@@ -1,0 +1,43 @@
+# Rakesh Roushan - Personal Site
+
+## Project Overview
+Personal portfolio + marketing site at roushanrakesh.com. Monorepo with strategy docs.
+
+## Tech Stack
+- **Framework**: Astro 6 (App Router pattern, Content Collections, MDX)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS 4 with CSS variables (oklch color space)
+- **Interactive**: React islands for Three.js, AI chat, and forms
+- **CMS**: Keystatic (git-based, TypeScript schemas)
+- **Hosting**: Cloudflare Workers via @astrojs/cloudflare adapter
+- **Package Manager**: pnpm workspaces + Turborepo
+
+## Key Conventions
+- Dark-first design with oklch color tokens
+- Astro components for static content, React islands only where interactivity is needed (`client:visible`, `client:load`)
+- Content in `src/content/` managed by Astro Content Collections
+- Data files (experience, socials) in `src/data/`
+- Section components in `src/components/sections/`
+- Minimal JS shipped to client — zero JS by default
+
+## Directory Structure
+```
+apps/web/src/
+  components/sections/  — Page sections (Hero, About, Experience, etc.)
+  components/3d/        — Three.js React islands
+  components/ui/        — Shared UI components
+  content/posts/        — MDX blog posts
+  data/                 — TypeScript data files
+  layouts/              — Astro layouts
+  pages/                — Astro pages (file-based routing)
+  styles/               — Global CSS
+  lib/                  — Utilities
+docs/                   — Strategy & company docs (markdown)
+```
+
+## Code Style
+- Use Astro components (.astro) for static sections
+- Use React (.tsx) only for interactive islands
+- Tailwind utility classes, no CSS modules
+- Keep components focused and composable
+- No Framer Motion — use CSS animations or Astro view transitions
