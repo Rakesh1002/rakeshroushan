@@ -2,65 +2,39 @@
 import { socials, siteConfig } from "@/data/socials";
 
 const contactLinks = [
-  { label: "Email", value: socials.email, href: `mailto:${socials.email}` },
-  {
-    label: "LinkedIn",
-    value: "rakeshroushan1002",
-    href: socials.linkedin,
-  },
-  { label: "GitHub", value: "Rakesh1002", href: socials.github },
-  { label: "Twitter/X", value: "@buildwithrakesh", href: socials.twitter },
+  { label: "email", value: socials.email, href: `mailto:${socials.email}` },
+  { label: "linkedin", value: "rakeshroushan1002", href: socials.linkedin },
+  { label: "github", value: "Rakesh1002", href: socials.github },
+  { label: "twitter", value: "@buildwithrakesh", href: socials.twitter },
 ];
 ---
 
-<section id="contact" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <div class="max-w-2xl">
-      <h2 class="text-3xl font-bold mb-4">Let's build together</h2>
-      <p class="text-text-muted mb-12 leading-relaxed">
-        I'm always interested in hearing about new opportunities, collaborations,
-        and ambitious ideas. Whether you want to build something together, invest,
-        or just say hi — drop me a line.
-      </p>
+<section id="contact" class="py-28 px-6">
+  <div class="mx-auto max-w-5xl">
+    <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+      <span class="text-accent">#</span> contact
+    </p>
 
-      <div class="space-y-4 mb-12">
-        {
-          contactLinks.map((link) => (
-            <a
-              href={link.href}
-              target={link.href.startsWith("mailto") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              class="group flex items-center justify-between p-4 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
-            >
-              <div>
-                <p class="text-xs text-text-muted uppercase tracking-wider mb-1">
-                  {link.label}
-                </p>
-                <p class="font-medium group-hover:text-accent transition-colors">
-                  {link.value}
-                </p>
-              </div>
-              <svg
-                class="w-4 h-4 text-text-muted group-hover:text-text transition-colors"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                />
-              </svg>
-            </a>
-          ))
-        }
-      </div>
+    <p class="text-text-secondary mb-10 max-w-xl leading-relaxed">
+      Open to AI product advisory, speaking, partnerships, and co-building.
+    </p>
 
-      <p class="text-sm text-text-muted">
-        Based in {siteConfig.location}. Open to remote collaboration worldwide.
-      </p>
+    <div class="space-y-2 max-w-lg">
+      {contactLinks.map((link) => (
+        <a
+          href={link.href}
+          target={link.href.startsWith("mailto") ? undefined : "_blank"}
+          rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+          class="group flex items-center justify-between py-3 border-b border-border/50 hover:border-accent/30 transition-colors"
+        >
+          <span class="font-mono text-xs text-text-muted">{link.label}</span>
+          <span class="text-sm group-hover:text-accent transition-colors">{link.value}</span>
+        </a>
+      ))}
     </div>
+
+    <p class="text-xs text-text-muted/60 mt-8 font-mono">
+      {siteConfig.location}
+    </p>
   </div>
 </section>

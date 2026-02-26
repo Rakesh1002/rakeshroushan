@@ -1,0 +1,70 @@
+---
+/**
+ * Giscus comments powered by GitHub Discussions.
+ *
+ * Setup required:
+ * 1. Enable Discussions on your GitHub repo
+ * 2. Install the Giscus app: https://github.com/apps/giscus
+ * 3. Configure at https://giscus.app and update the props below
+ */
+interface Props {
+  term?: string;
+}
+
+const { term } = Astro.props;
+---
+
+<div class="mt-16 pt-8 border-t border-border">
+  <h3 class="text-lg font-semibold mb-6">Comments</h3>
+  <div id="giscus-container">
+    <p class="text-sm text-text-muted">Loading comments...</p>
+  </div>
+</div>
+
+<script define:vars={{ term }}>
+  function loadGiscus() {
+    const container = document.getElementById('giscus-container');
+    if (!container) return;
+
+    // Check if giscus is already loaded
+    if (container.querySelector('.giscus')) return;
+
+    container.innerHTML = '';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'Rakesh1002/roushanrakesh.com');
+    script.setAttribute('data-repo-id', '');
+    script.setAttribute('data-category', 'Blog Comments');
+    script.setAttribute('data-category-id', '');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', 'dark_dimmed');
+    script.setAttribute('data-lang', 'en');
+    script.setAttribute('data-loading', 'lazy');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  // Load when visible
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadGiscus();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    const container = document.getElementById('giscus-container');
+    if (container) observer.observe(container);
+  } else {
+    loadGiscus();
+  }
+</script>

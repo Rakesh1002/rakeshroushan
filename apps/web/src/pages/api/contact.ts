@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const body = await request.json();
     const { name, email, message, type } = body;
@@ -14,7 +14,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const resendKey = import.meta.env.RESEND_API_KEY;
+    const runtimeEnv = (locals as any).runtime?.env || {};
+    const resendKey = runtimeEnv.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
     if (!resendKey) {
       console.log("Contact form submission (no RESEND_API_KEY configured):", {
         name,

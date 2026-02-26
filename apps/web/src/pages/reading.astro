@@ -1,5 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Nav from "@/components/sections/Nav.astro";
+import Footer from "@/components/sections/Footer.astro";
 
 const currentlyReading = [
   { title: "The Lean Product Playbook", author: "Dan Olsen", genre: "Product Management", progress: 60 },
@@ -85,31 +87,38 @@ const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
 ---
 
 <Base title="Reading List - Rakesh Roushan" description="Books that shaped how I think about products, leadership, and life.">
-  <div class="min-h-screen py-24 px-6">
+  <Nav />
+  <main class="min-h-screen pt-28 pb-24 px-6">
     <div class="mx-auto max-w-4xl">
-      <a href="/" class="text-sm text-text-muted hover:text-text transition-colors mb-8 inline-block">&larr; Back</a>
+      <a href="/" class="font-mono text-xs text-text-muted hover:text-accent transition-colors mb-8 inline-block">&larr; ~/home</a>
 
-      <h1 class="text-4xl font-bold mb-4">Reading List</h1>
-      <p class="text-text-muted mb-4 leading-relaxed max-w-2xl">
+      <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+        <span class="text-accent">#</span> reading
+      </p>
+      <p class="text-text-secondary text-sm mb-2 max-w-2xl leading-relaxed">
         Books that shaped how I think about products, leadership, and life.
-        {stats.total} books read since I started tracking in {stats.tracking}.
+      </p>
+      <p class="text-xs text-text-muted/50 font-mono mb-16">
+        {stats.total} books &middot; tracking since {stats.tracking}
       </p>
 
       <!-- Currently Reading -->
       <section class="mb-16">
-        <h2 class="text-xl font-semibold mb-6 text-accent">Currently Reading</h2>
-        <div class="grid gap-4">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-emerald-500">&gt;</span> currently reading
+        </p>
+        <div class="space-y-1">
           {currentlyReading.map((book) => (
-            <div class="p-5 rounded-xl border border-border bg-bg-card/50">
-              <div class="flex items-start justify-between mb-3">
+            <div class="py-3 border-b border-border/50">
+              <div class="flex items-baseline justify-between gap-4 mb-2">
                 <div>
-                  <h3 class="font-semibold">{book.title}</h3>
-                  <p class="text-sm text-text-muted">{book.author} &middot; {book.genre}</p>
+                  <span class="text-sm font-medium">{book.title}</span>
+                  <span class="text-xs text-text-muted ml-2">— {book.author}</span>
                 </div>
-                <span class="text-sm font-mono text-accent">{book.progress}%</span>
+                <span class="text-xs font-mono text-accent shrink-0">{book.progress}%</span>
               </div>
-              <div class="w-full h-1.5 bg-bg-secondary rounded-full overflow-hidden">
-                <div class="h-full bg-accent rounded-full" style={`width: ${book.progress}%`} />
+              <div class="w-full h-px bg-bg-secondary overflow-hidden">
+                <div class="h-full bg-accent" style={`width: ${book.progress}%`} />
               </div>
             </div>
           ))}
@@ -118,16 +127,18 @@ const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
 
       <!-- Top Books -->
       <section class="mb-16">
-        <h2 class="text-xl font-semibold mb-6">Books That Changed Me</h2>
-        <div class="space-y-4">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> books that changed me
+        </p>
+        <div class="space-y-1">
           {topBooks.map((book, i) => (
-            <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+            <div class="py-3 border-b border-border/50">
               <div class="flex items-start gap-4">
-                <span class="text-2xl font-bold text-text-muted/30 font-mono shrink-0 w-8">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-xs font-mono text-text-muted/30 shrink-0 w-5 pt-0.5">{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <h3 class="font-semibold">{book.title}</h3>
-                  <p class="text-sm text-text-muted mb-2">{book.author} &middot; Read {book.year}</p>
-                  <p class="text-sm text-text-secondary italic">"{book.insight}"</p>
+                  <span class="text-sm font-medium">{book.title}</span>
+                  <span class="text-xs text-text-muted ml-2">— {book.author}, {book.year}</span>
+                  <p class="text-xs text-text-muted/60 mt-1 italic">"{book.insight}"</p>
                 </div>
               </div>
             </div>
@@ -137,25 +148,23 @@ const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
 
       <!-- By Category -->
       <section class="mb-16">
-        <h2 class="text-xl font-semibold mb-6">Library</h2>
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> library
+        </p>
         <div class="space-y-8">
           {byCategory.map((category) => (
             <div>
-              <h3 class="text-sm font-medium text-text-muted uppercase tracking-wider mb-3">{category.name}</h3>
-              <div class="space-y-2">
+              <p class="font-mono text-xs text-text-muted/50 mb-3">{category.name.toLowerCase()}</p>
+              <div class="space-y-0">
                 {category.books.map((book) => (
-                  <div class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-bg-card/50 transition-colors">
-                    <div class="flex items-center gap-3">
-                      <span class={`text-xs px-1.5 py-0.5 rounded ${book.status === 'read' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
-                        {book.status === 'read' ? 'Read' : 'Queue'}
-                      </span>
-                      <div>
-                        <span class="text-sm font-medium">{book.title}</span>
-                        <span class="text-sm text-text-muted ml-2">— {book.author}</span>
-                      </div>
+                  <div class="flex items-center justify-between py-2 border-b border-border/30 last:border-0">
+                    <div class="flex items-center gap-2">
+                      <span class={`inline-block w-1.5 h-1.5 rounded-full shrink-0 ${book.status === 'read' ? 'bg-emerald-500' : 'bg-yellow-500/60'}`} />
+                      <span class="text-sm">{book.title}</span>
+                      <span class="text-xs text-text-muted">— {book.author}</span>
                     </div>
                     {book.rating && (
-                      <span class="text-xs text-text-muted font-mono">
+                      <span class="text-xs text-text-muted/40 font-mono shrink-0">
                         {"*".repeat(book.rating)}
                       </span>
                     )}
@@ -169,35 +178,37 @@ const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
 
       <!-- Recommendations -->
       <section class="mb-16">
-        <h2 class="text-xl font-semibold mb-6">My Recommendations</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
-            <h3 class="font-semibold mb-3">For New Product Managers</h3>
-            <ul class="space-y-2 text-sm text-text-secondary">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> recommendations
+        </p>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div class="p-4 rounded-lg bg-bg-card">
+            <p class="text-sm font-medium mb-3">For New Product Managers</p>
+            <ul class="space-y-1.5 text-xs text-text-muted">
               <li>Continuous Discovery Habits — Teresa Torres</li>
               <li>Hooked — Nir Eyal</li>
               <li>The Lean Startup — Eric Ries</li>
             </ul>
           </div>
-          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
-            <h3 class="font-semibold mb-3">For Aspiring Leaders</h3>
-            <ul class="space-y-2 text-sm text-text-secondary">
+          <div class="p-4 rounded-lg bg-bg-card">
+            <p class="text-sm font-medium mb-3">For Aspiring Leaders</p>
+            <ul class="space-y-1.5 text-xs text-text-muted">
               <li>Turn the Ship Around — David Marquet</li>
               <li>Radical Candor — Kim Scott</li>
               <li>High Output Management — Andy Grove</li>
             </ul>
           </div>
-          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
-            <h3 class="font-semibold mb-3">For People Feeling Stuck</h3>
-            <ul class="space-y-2 text-sm text-text-secondary">
+          <div class="p-4 rounded-lg bg-bg-card">
+            <p class="text-sm font-medium mb-3">For People Feeling Stuck</p>
+            <ul class="space-y-1.5 text-xs text-text-muted">
               <li>Essentialism — Greg McKeown</li>
               <li>Atomic Habits — James Clear</li>
               <li>Range — David Epstein</li>
             </ul>
           </div>
-          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
-            <h3 class="font-semibold mb-3">For Entrepreneurs</h3>
-            <ul class="space-y-2 text-sm text-text-secondary">
+          <div class="p-4 rounded-lg bg-bg-card">
+            <p class="text-sm font-medium mb-3">For Entrepreneurs</p>
+            <ul class="space-y-1.5 text-xs text-text-muted">
               <li>The Lean Startup — Eric Ries</li>
               <li>Zero to One — Peter Thiel</li>
               <li>The Hard Thing About Hard Things — Ben Horowitz</li>
@@ -206,5 +217,6 @@ const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
         </div>
       </section>
     </div>
-  </div>
+  </main>
+  <Footer />
 </Base>

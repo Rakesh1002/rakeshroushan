@@ -1,0 +1,46 @@
+---
+/**
+ * ShareableInsight — A visually striking "quote card" at the top of each blog post
+ * that readers can screenshot and share. Acts as a viral distribution mechanism.
+ */
+interface Props {
+  insight: string;
+  author?: string;
+  postUrl: string;
+}
+
+const { insight, author = "Rakesh Roushan", postUrl } = Astro.props;
+const tweetText = `"${insight}" — @buildwithrakesh\n\n${postUrl}`;
+const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+---
+
+<div class="not-prose my-10 relative group">
+  <div class="p-8 rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-bg-card/50 to-bg-card/50 relative overflow-hidden">
+    <!-- Decorative corner -->
+    <div class="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-[3rem]"></div>
+    <div class="absolute top-3 right-3 text-accent/20 text-6xl font-serif leading-none">&rdquo;</div>
+
+    <p class="text-lg md:text-xl font-medium text-text leading-relaxed mb-4 relative z-10">
+      {insight}
+    </p>
+    <div class="flex items-center justify-between relative z-10">
+      <p class="text-sm text-text-muted">— {author}</p>
+      <div class="flex items-center gap-2">
+        <a
+          href={tweetUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-secondary border border-border text-xs text-text-muted hover:text-text hover:border-border-hover transition-colors"
+        >
+          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          Share this
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="text-[10px] text-text-muted/40 text-center mt-2">
+    Screenshot and share this insight
+  </p>
+</div>

@@ -1,41 +1,95 @@
 ---
 const links = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Blog", href: "#blog" },
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Shipped", href: "/#projects" },
+  { label: "Blog", href: "/#blog" },
   { label: "Reading", href: "/reading" },
-  { label: "Contact", href: "#contact" },
+  { label: "Speaking", href: "/speaking" },
 ];
 ---
 
-<nav
-  class="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border/50"
->
-  <div class="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-    <a
-      href="/"
-      class="text-lg font-semibold tracking-tight hover:text-accent transition-colors"
-    >
-      R
+<nav class="fixed top-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur-md">
+  <div class="mx-auto max-w-5xl flex items-center justify-between px-6 h-14">
+    <a href="/" class="font-mono text-sm text-text-muted hover:text-accent transition-colors">
+      ~/rakesh
     </a>
-    <div class="hidden md:flex items-center gap-8">
-      {
-        links.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm text-text-muted hover:text-text transition-colors"
-          >
-            {link.label}
-          </a>
-        ))
-      }
+    <div class="hidden md:flex items-center gap-6">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="text-xs text-text-muted hover:text-text transition-colors font-mono"
+        >
+          {link.label.toLowerCase()}
+        </a>
+      ))}
+      <a
+        href="/#contact"
+        class="text-xs font-mono text-accent hover:text-accent-hover transition-colors"
+      >
+        contact
+      </a>
     </div>
-    <a
-      href="#contact"
-      class="text-sm px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg transition-colors"
-    >
-      Get in touch
-    </a>
+    <div class="flex items-center gap-3">
+      <button
+        id="nav-search-btn"
+        class="hidden md:inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-text transition-colors font-mono cursor-pointer"
+        title="Search (Cmd+K)"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+        <kbd class="text-[10px] text-text-muted/60">&#8984;K</kbd>
+      </button>
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-1.5 text-text-muted hover:text-text transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-4 h-4" id="menu-open-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg class="w-4 h-4 hidden" id="menu-close-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-bg/95 backdrop-blur-md">
+    <div class="px-6 py-4 space-y-3">
+      {links.map((link) => (
+        <a href={link.href} class="block text-sm text-text-muted hover:text-text transition-colors font-mono">
+          {link.label.toLowerCase()}
+        </a>
+      ))}
+      <a href="/#contact" class="block text-sm text-accent font-mono">contact</a>
+    </div>
   </div>
 </nav>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const openIcon = document.getElementById("menu-open-icon");
+  const closeIcon = document.getElementById("menu-close-icon");
+
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+    openIcon?.classList.toggle("hidden");
+    closeIcon?.classList.toggle("hidden");
+  });
+
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+      openIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    });
+  });
+
+  const searchBtn = document.getElementById("nav-search-btn");
+  searchBtn?.addEventListener("click", () => {
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }));
+  });
+</script>

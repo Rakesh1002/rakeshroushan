@@ -1,45 +1,77 @@
 ---
 ---
 
-<section id="newsletter" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <div class="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-bg-card to-bg-secondary p-8 md:p-12">
-      <div class="relative z-10 max-w-xl">
-        <p class="text-xs uppercase tracking-widest text-accent mb-3 font-medium">Newsletter</p>
-        <h2 class="text-3xl font-bold mb-4">Frameworks for builders</h2>
-        <p class="text-text-secondary mb-8 leading-relaxed">
-          Weekly insights on AI product strategy, execution systems, and lessons from building 20+ products as a solo founder. No fluff — just frameworks you can use Monday morning.
-        </p>
+<section id="newsletter" class="py-28 px-6">
+  <div class="mx-auto max-w-5xl">
+    <div class="max-w-lg">
+      <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+        <span class="text-accent">#</span> newsletter
+      </p>
+      <p class="text-text-secondary mb-6 leading-relaxed">
+        Weekly on AI product strategy, execution, and lessons from building 20+ products solo. No fluff.
+      </p>
 
-        <form
-          action="#"
-          method="POST"
-          class="flex flex-col sm:flex-row gap-3"
-          id="newsletter-form"
+      <form class="flex gap-2" id="newsletter-form">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="you@company.com"
+          class="flex-1 px-3 py-2 rounded bg-bg-secondary text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:ring-1 focus:ring-accent/50 transition-all font-mono"
+        />
+        <button
+          type="submit"
+          id="newsletter-btn"
+          class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-mono rounded transition-colors disabled:opacity-40"
         >
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="you@company.com"
-            class="flex-1 px-4 py-3 rounded-lg bg-bg border border-border text-text placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors text-sm"
-          />
-          <button
-            type="submit"
-            class="px-6 py-3 bg-accent hover:bg-accent-hover text-white font-medium rounded-lg transition-colors text-sm whitespace-nowrap"
-          >
-            Subscribe
-          </button>
-        </form>
+          subscribe
+        </button>
+      </form>
 
-        <p class="text-xs text-text-muted mt-4">
-          Join 0 → 1 builders. Unsubscribe anytime.
-        </p>
-      </div>
-
-      <!-- Background decoration -->
-      <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div class="absolute bottom-0 right-1/4 w-48 h-48 bg-accent/3 rounded-full blur-2xl translate-y-1/2"></div>
+      <p id="newsletter-msg" class="text-[11px] text-text-muted/50 mt-3 font-mono">
+        Unsubscribe anytime.
+      </p>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const btn = document.getElementById("newsletter-btn") as HTMLButtonElement;
+  const msg = document.getElementById("newsletter-msg") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get("email") as string;
+    if (!email) return;
+
+    btn.disabled = true;
+    btn.textContent = "...";
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        msg.textContent = "You're in.";
+        msg.classList.remove("text-text-muted/50");
+        msg.classList.add("text-emerald-500");
+        form.reset();
+        btn.textContent = "done";
+      } else {
+        msg.textContent = data.error || "Failed. Try again.";
+        msg.classList.add("text-red-400");
+        btn.disabled = false;
+        btn.textContent = "subscribe";
+      }
+    } catch {
+      msg.textContent = "Network error.";
+      msg.classList.add("text-red-400");
+      btn.disabled = false;
+      btn.textContent = "subscribe";
+    }
+  });
+</script>

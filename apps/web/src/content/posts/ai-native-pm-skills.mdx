@@ -1,41 +1,316 @@
 ---
-title: "The 'AI Native' PM Skills Matrix: Why SQL is Out and Prompt Architecture is In"
-description: "The job description for PMs hasn't changed in 10 years — but the job itself has changed completely. Here's the new skills matrix for 2026."
+title: "The AI-Native PM Skills Matrix: A Complete Framework for 2026"
+description: "The PM job description hasn't changed in 10 years — but the job itself has changed completely. Here's the definitive skills matrix for the AI era, with assessments, examples, and an action plan."
 date: 2026-02-20
-tags: ["ai", "product-management", "career"]
+tags: ["ai", "product-management", "career", "frameworks"]
 ---
 
-The job description for a Product Manager hasn't changed much in 10 years.
-SQL. User Research. A/B Testing. Roadmapping.
+The job description for a Product Manager hasn't changed much in 10 years. SQL. User Research. A/B Testing. Roadmapping.
 
 **But the job itself has changed completely.**
 
-If you are still optimizing for "writing better tickets," you are optimizing for a world that is disappearing. The AI-Native PM isn't just a PM who uses ChatGPT. They are a PM who understands how to _architect_ products where the core value prop is probabilistic, not deterministic.
+If you are still optimizing for "writing better tickets," you are optimizing for a world that is disappearing. The AI-Native PM isn't just a PM who uses ChatGPT. They are a PM who understands how to _architect_ products where the core value prop is **probabilistic**, not deterministic.
 
-Here is the new skills matrix for 2026.
+Here is the complete new skills matrix for 2026.
 
-## 1. From "SQL" to "Context Engineering"
+---
+
+## The Skills Matrix: Old World vs. New World
+
+<div class="not-prose my-10 overflow-x-auto">
+  <table class="w-full text-sm border-collapse">
+    <thead>
+      <tr class="border-b border-border">
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Skill Area</th>
+        <th class="text-left py-3 px-4 text-red-400 font-medium">Old World (2015-2023)</th>
+        <th class="text-left py-3 px-4 text-green-400 font-medium">New World (2024+)</th>
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Why It Changed</th>
+      </tr>
+    </thead>
+    <tbody class="text-text-muted">
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Data</td>
+        <td class="py-3 px-4">SQL queries</td>
+        <td class="py-3 px-4 text-text">Context engineering & RAG</td>
+        <td class="py-3 px-4">The data question shifted from "what happened?" to "what should happen next?"</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Quality</td>
+        <td class="py-3 px-4">Acceptance criteria</td>
+        <td class="py-3 px-4 text-text">Eval sets & benchmarks</td>
+        <td class="py-3 px-4">AI outputs are probabilistic — you can't write deterministic pass/fail criteria</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Testing</td>
+        <td class="py-3 px-4">A/B testing</td>
+        <td class="py-3 px-4 text-text">Model arbitrage</td>
+        <td class="py-3 px-4">The biggest lever is model selection, not button colors</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Specs</td>
+        <td class="py-3 px-4">PRDs & Jira tickets</td>
+        <td class="py-3 px-4 text-text">Prompt architecture docs</td>
+        <td class="py-3 px-4">You can't spec "The AI should be helpful" — you need system prompt design</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Metrics</td>
+        <td class="py-3 px-4">DAU, retention, conversion</td>
+        <td class="py-3 px-4 text-text">Task completion, latency, cost-per-query</td>
+        <td class="py-3 px-4">AI products are measured by outcomes, not engagement</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4 font-medium text-text">Pricing</td>
+        <td class="py-3 px-4">Seat-based or tiered</td>
+        <td class="py-3 px-4 text-text">Usage-based & outcome-based</td>
+        <td class="py-3 px-4">COGS scale with usage — flat pricing kills margins</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Let's go deep on each one.
+
+---
+
+## 1. From SQL to Context Engineering
 
 **Old World:** You write a query to find out what happened.
 **New World:** You design the _context window_ to make the right thing happen.
 
-The most valuable data skill today isn't retrieving rows; it's understanding RAG (Retrieval-Augmented Generation). How do you feed the right user history into the LLM at the right moment?
+The most valuable data skill today isn't retrieving rows — it's understanding **RAG (Retrieval-Augmented Generation)**. How do you feed the right user history, the right documents, the right context into the LLM at the right moment?
 
-## 2. From "Acceptance Criteria" to "Eval Sets"
+### What Context Engineering Actually Looks Like
+
+<div class="not-prose my-8 p-5 rounded-xl border border-border bg-bg-card/50">
+  <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-4">Example: Customer Support AI</p>
+  <div class="space-y-3 text-sm">
+    <div class="flex gap-3">
+      <span class="text-text-muted shrink-0 font-mono">Step 1</span>
+      <p class="text-text-muted">User asks: <em class="text-text">"My order hasn't arrived"</em></p>
+    </div>
+    <div class="flex gap-3">
+      <span class="text-text-muted shrink-0 font-mono">Step 2</span>
+      <p class="text-text-muted">System retrieves: order status, shipping history, user's previous complaints, refund policy</p>
+    </div>
+    <div class="flex gap-3">
+      <span class="text-text-muted shrink-0 font-mono">Step 3</span>
+      <p class="text-text-muted">Context window assembled: <em class="text-text">[system prompt] + [user profile] + [order data] + [policy docs] + [user message]</em></p>
+    </div>
+    <div class="flex gap-3">
+      <span class="text-text-muted shrink-0 font-mono">Step 4</span>
+      <p class="text-text-muted">LLM generates response with the right tone, facts, and resolution options</p>
+    </div>
+  </div>
+</div>
+
+The PM's job isn't to write the prompt. It's to **design the information architecture** that determines what goes into the context window, in what order, and with what priority when the window gets too full.
+
+> **Key Insight:** The best AI products aren't the ones with the best prompts. They're the ones with the best context retrieval systems. The model is a commodity — the context is the product.
+
+---
+
+## 2. From Acceptance Criteria to Eval Sets
 
 **Old World:** If X, then Y. (Deterministic)
 **New World:** In 95% of cases, the response should be roughly Z. (Probabilistic)
 
-You can't write a Jira ticket that says "The AI should be funny." You need to build an _evaluation set_ — a spreadsheet of 100 inputs and "gold standard" outputs. Your job is to define "good."
+You can't write a Jira ticket that says "The AI should be funny." You need to build an **evaluation set** — a curated dataset of inputs and "gold standard" outputs.
 
-## 3. From "A/B Testing" to "Model Arb"
+### What an Eval Set Looks Like
 
-**Old World:** Test Blue button vs. Red button.
-**New World:** Test GPT-4o vs. Claude 3.5 Sonnet vs. Llama 3 (70B).
+| Input | Expected Output | Category | Pass Criteria |
+|-------|----------------|----------|--------------|
+| "Summarize this 10-page contract" | 200-word summary covering parties, terms, obligations | Summarization | Covers all 3 key elements, < 250 words |
+| "Is this clause problematic?" | Identifies risk + explains in plain English | Risk Detection | Matches expert assessment in 90%+ of cases |
+| "Translate this to Hindi" | Accurate, natural-sounding Hindi translation | Translation | BLEU score > 0.7 on test set |
+| "Change my password" | Step-by-step instructions for the specific platform | Intent Classification | Correct intent detected in 95%+ of cases |
 
-The biggest lever for cost and latency isn't code optimization; it's model selection. An AI PM needs to know when to use a $0.01 model and when to burn cash on the $10 model.
+<div class="not-prose my-8 p-5 rounded-xl border border-accent/20 bg-accent/5">
+  <p class="text-sm font-semibold text-accent mb-2">The PM's New Job</p>
+  <p class="text-sm text-text-muted leading-relaxed">Your job is to define "good." Not in a Jira ticket. In a spreadsheet of 100-500 test cases that your team runs against every model update. You are the <strong class="text-text">human benchmark</strong>.</p>
+</div>
+
+### The Eval Pipeline
+
+Your quality process changes from waterfall (spec → build → QA → ship) to continuous evaluation:
+
+<div class="not-prose my-8">
+  <div class="flex items-center justify-between gap-2 text-xs text-center overflow-x-auto pb-2">
+    <div class="rounded-lg bg-bg-card border border-border p-3 min-w-[100px]">
+      <p class="font-semibold text-text mb-1">Define</p>
+      <p class="text-text-muted">Build eval set</p>
+    </div>
+    <div class="text-text-muted">&rarr;</div>
+    <div class="rounded-lg bg-bg-card border border-border p-3 min-w-[100px]">
+      <p class="font-semibold text-text mb-1">Baseline</p>
+      <p class="text-text-muted">Score current model</p>
+    </div>
+    <div class="text-text-muted">&rarr;</div>
+    <div class="rounded-lg bg-bg-card border border-border p-3 min-w-[100px]">
+      <p class="font-semibold text-text mb-1">Iterate</p>
+      <p class="text-text-muted">Adjust prompts/RAG</p>
+    </div>
+    <div class="text-text-muted">&rarr;</div>
+    <div class="rounded-lg bg-bg-card border border-border p-3 min-w-[100px]">
+      <p class="font-semibold text-text mb-1">Measure</p>
+      <p class="text-text-muted">Re-run eval set</p>
+    </div>
+    <div class="text-text-muted">&rarr;</div>
+    <div class="rounded-lg bg-accent/20 border border-accent/30 p-3 min-w-[100px]">
+      <p class="font-semibold text-accent mb-1">Ship</p>
+      <p class="text-text-muted">If score improves</p>
+    </div>
+  </div>
+</div>
 
 ---
 
-**The takeaway:**
-Don't learn to code (unless you enjoy it). Learn to _architect systems_ that think.
+## 3. From A/B Testing to Model Arbitrage
+
+**Old World:** Test Blue button vs. Red button.
+**New World:** Test GPT-4o vs. Claude Sonnet vs. Llama 3 (405B) vs. Gemini.
+
+The biggest lever for cost and quality isn't code optimization — it's **model selection**. An AI PM needs to know when to use a $0.001/1K token model and when to burn cash on the $0.01/1K token model.
+
+### The Model Decision Matrix
+
+<div class="not-prose my-8 overflow-x-auto">
+  <table class="w-full text-sm border-collapse">
+    <thead>
+      <tr class="border-b border-border">
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Use Case</th>
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Best Model Tier</th>
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Cost/1K Tokens</th>
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Latency</th>
+      </tr>
+    </thead>
+    <tbody class="text-text-muted">
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4">Classification, routing, extraction</td>
+        <td class="py-3 px-4 text-green-400">Small (Haiku, GPT-4o-mini)</td>
+        <td class="py-3 px-4 font-mono">$0.0001</td>
+        <td class="py-3 px-4">< 500ms</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4">Summarization, Q&A, chat</td>
+        <td class="py-3 px-4 text-yellow-400">Medium (Sonnet, GPT-4o)</td>
+        <td class="py-3 px-4 font-mono">$0.003</td>
+        <td class="py-3 px-4">1-3s</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4">Complex reasoning, code gen, analysis</td>
+        <td class="py-3 px-4 text-red-400">Large (Opus, GPT-4.5)</td>
+        <td class="py-3 px-4 font-mono">$0.015</td>
+        <td class="py-3 px-4">3-10s</td>
+      </tr>
+      <tr class="border-b border-border/50">
+        <td class="py-3 px-4">High-volume, low-complexity</td>
+        <td class="py-3 px-4 text-blue-400">Open Source (Llama 3, Mistral)</td>
+        <td class="py-3 px-4 font-mono">$0.0001</td>
+        <td class="py-3 px-4">< 1s (edge)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+> **The 80/20 rule of model selection:** 80% of your AI features can run on cheap, fast models. Only 20% need frontier intelligence. The PMs who understand this save their companies millions.
+
+---
+
+## 4. From PRDs to Prompt Architecture
+
+You can't write a PRD that says "Make the AI helpful." You need a **Prompt Architecture Document** — a structured spec for how the AI system behaves.
+
+### A Prompt Architecture Doc Includes:
+
+<div class="not-prose my-8 space-y-3">
+  <div class="flex items-start gap-3 p-4 rounded-lg border border-border bg-bg-card/50">
+    <span class="text-accent font-semibold shrink-0">1.</span>
+    <div>
+      <p class="font-medium text-text text-sm">System Identity</p>
+      <p class="text-xs text-text-muted mt-1">Who is this AI? What's its persona, tone, and boundaries?</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-3 p-4 rounded-lg border border-border bg-bg-card/50">
+    <span class="text-accent font-semibold shrink-0">2.</span>
+    <div>
+      <p class="font-medium text-text text-sm">Context Sources</p>
+      <p class="text-xs text-text-muted mt-1">What data feeds into the context window? User history? Documents? Real-time data?</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-3 p-4 rounded-lg border border-border bg-bg-card/50">
+    <span class="text-accent font-semibold shrink-0">3.</span>
+    <div>
+      <p class="font-medium text-text text-sm">Guardrails</p>
+      <p class="text-xs text-text-muted mt-1">What should the AI never do? What topics are off-limits? What's the escalation path?</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-3 p-4 rounded-lg border border-border bg-bg-card/50">
+    <span class="text-accent font-semibold shrink-0">4.</span>
+    <div>
+      <p class="font-medium text-text text-sm">Output Format</p>
+      <p class="text-xs text-text-muted mt-1">JSON? Markdown? Structured data? What does the downstream system expect?</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-3 p-4 rounded-lg border border-border bg-bg-card/50">
+    <span class="text-accent font-semibold shrink-0">5.</span>
+    <div>
+      <p class="font-medium text-text text-sm">Fallback Behavior</p>
+      <p class="text-xs text-text-muted mt-1">What happens when the model doesn't know? When confidence is low? When it hallucinates?</p>
+    </div>
+  </div>
+</div>
+
+---
+
+## 5. New Metrics for AI Products
+
+Traditional SaaS metrics don't capture what matters in AI products.
+
+| Metric | What It Measures | Why It Matters |
+|--------|-----------------|----------------|
+| **Task Completion Rate** | % of user requests successfully resolved | The core value metric — did the AI do the job? |
+| **Time to First Token** | Latency before response starts streaming | Perceived speed matters more than total response time |
+| **Cost per Query** | Average inference cost per user interaction | Determines unit economics at scale |
+| **Hallucination Rate** | % of responses with factual errors | Trust is fragile — one bad response loses a user |
+| **Context Utilization** | % of provided context used in response | Measures RAG quality — are you retrieving the right stuff? |
+| **Human Escalation Rate** | % of interactions needing human intervention | Lower = better AI, but 0% is suspicious |
+
+---
+
+## The Self-Assessment
+
+Rate yourself honestly on each skill (1-5). If you score below 3 on any New World skill, that's your development priority.
+
+<div class="not-prose my-8 overflow-x-auto">
+  <table class="w-full text-sm border-collapse">
+    <thead>
+      <tr class="border-b border-border">
+        <th class="text-left py-3 px-4 text-text-muted font-medium">Skill</th>
+        <th class="text-center py-3 px-4 text-text-muted font-medium">1 (None)</th>
+        <th class="text-center py-3 px-4 text-text-muted font-medium">2</th>
+        <th class="text-center py-3 px-4 text-text-muted font-medium">3</th>
+        <th class="text-center py-3 px-4 text-text-muted font-medium">4</th>
+        <th class="text-center py-3 px-4 text-text-muted font-medium">5 (Expert)</th>
+      </tr>
+    </thead>
+    <tbody class="text-text-muted">
+      <tr class="border-b border-border/50"><td class="py-3 px-4 text-text">Context Engineering</td><td class="py-3 px-4 text-center">Can't explain RAG</td><td class="py-3 px-4 text-center">Knows the concept</td><td class="py-3 px-4 text-center">Can design a RAG pipeline</td><td class="py-3 px-4 text-center">Optimizes retrieval quality</td><td class="py-3 px-4 text-center">Architects multi-source context systems</td></tr>
+      <tr class="border-b border-border/50"><td class="py-3 px-4 text-text">Eval Sets</td><td class="py-3 px-4 text-center">Never built one</td><td class="py-3 px-4 text-center">Understands the concept</td><td class="py-3 px-4 text-center">Can build a basic eval set</td><td class="py-3 px-4 text-center">Runs automated eval pipelines</td><td class="py-3 px-4 text-center">Designs custom scoring rubrics</td></tr>
+      <tr class="border-b border-border/50"><td class="py-3 px-4 text-text">Model Selection</td><td class="py-3 px-4 text-center">Uses ChatGPT for everything</td><td class="py-3 px-4 text-center">Knows models differ</td><td class="py-3 px-4 text-center">Can pick the right tier</td><td class="py-3 px-4 text-center">Benchmarks models for specific tasks</td><td class="py-3 px-4 text-center">Runs cost-optimized multi-model routing</td></tr>
+      <tr class="border-b border-border/50"><td class="py-3 px-4 text-text">Prompt Architecture</td><td class="py-3 px-4 text-center">Writes ad-hoc prompts</td><td class="py-3 px-4 text-center">Uses system prompts</td><td class="py-3 px-4 text-center">Designs structured prompt systems</td><td class="py-3 px-4 text-center">Manages prompt versioning</td><td class="py-3 px-4 text-center">Architects multi-agent systems</td></tr>
+      <tr class="border-b border-border/50"><td class="py-3 px-4 text-text">AI Metrics</td><td class="py-3 px-4 text-center">Uses only DAU/MAU</td><td class="py-3 px-4 text-center">Tracks basic quality</td><td class="py-3 px-4 text-center">Monitors task completion + cost</td><td class="py-3 px-4 text-center">Full AI metrics dashboard</td><td class="py-3 px-4 text-center">Predictive cost modeling at scale</td></tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## The Bottom Line
+
+<div class="not-prose my-8 p-6 rounded-xl border border-accent/20 bg-accent/5">
+  <p class="text-lg font-semibold text-text mb-3">Don't learn to code (unless you enjoy it). Learn to architect systems that think.</p>
+  <p class="text-sm text-text-muted leading-relaxed">The AI-Native PM doesn't need to write Python. They need to understand information flow, probabilistic quality, cost structures, and system design. The best AI PMs I know couldn't pass a LeetCode interview — but they can design a product that uses 4 different models, serves 10M users, and costs $0.001 per interaction.</p>
+</div>
+
+The transition from traditional PM to AI-Native PM isn't optional. It's happening whether you prepare for it or not. The PMs who invest in these skills now will be the product leaders of the next decade. The rest will be replaced by the tools they refused to understand.

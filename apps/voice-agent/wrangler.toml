@@ -1,0 +1,19 @@
+name = "voice-agent"
+main = "src/index.ts"
+compatibility_date = "2025-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[ai]
+binding = "AI"
+
+[vars]
+CF_ACCOUNT_ID = "29252517c2955c4e7ffa117baf1dcbca"
+ALLOWED_ORIGIN = "https://roushanrakesh.com"
+
+[[durable_objects.bindings]]
+name = "VOICE_SESSION"
+class_name = "VoiceSession"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["VoiceSession"]

@@ -7,35 +7,24 @@ const posts = (await getCollection("posts"))
   .slice(0, 4);
 ---
 
-<section id="blog" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <div class="flex items-center justify-between mb-12">
+<section id="blog" class="py-28 px-6">
+  <div class="mx-auto max-w-5xl">
+    <div class="flex items-baseline justify-between mb-10">
       <div>
-        <h2 class="text-3xl font-bold mb-4">Blog</h2>
-        <p class="text-text-muted">
-          Thoughts on building products, AI, and the startup journey.
+        <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+          <span class="text-accent">#</span> blog
+        </p>
+        <p class="text-text-muted text-sm">
+          Frameworks, teardowns, and lessons from building 20+ AI products.
         </p>
       </div>
       {
         posts.length > 0 && (
           <a
             href="/blog"
-            class="hidden sm:inline-flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors"
+            class="hidden sm:inline-block font-mono text-xs text-text-muted hover:text-accent transition-colors"
           >
-            All posts
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
+            all posts &rarr;
           </a>
         )
       }
@@ -43,44 +32,34 @@ const posts = (await getCollection("posts"))
 
     {
       posts.length > 0 ? (
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-1">
           {posts.map((post) => (
             <a
               href={`/blog/${post.id}`}
-              class="group block p-6 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
+              class="group block py-4 border-b border-border/50 last:border-0"
             >
-              <time class="text-xs text-text-muted">
-                {post.data.date.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <h3 class="text-lg font-semibold mt-2 mb-2 group-hover:text-accent transition-colors">
-                {post.data.title}
-              </h3>
-              <p class="text-sm text-text-muted leading-relaxed line-clamp-2">
+              <div class="flex items-baseline justify-between gap-4 mb-1.5">
+                <h3 class="text-sm font-medium group-hover:text-accent transition-colors">
+                  {post.data.title}
+                </h3>
+                <time class="text-xs text-text-muted/40 font-mono shrink-0">
+                  {post.data.date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
+              <p class="text-xs text-text-muted leading-relaxed line-clamp-1">
                 {post.data.description}
               </p>
-              {post.data.tags && (
-                <div class="flex flex-wrap gap-2 mt-4">
-                  {post.data.tags.slice(0, 3).map((tag: string) => (
-                    <span class="text-xs px-2 py-0.5 rounded bg-bg-secondary text-text-muted">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
             </a>
           ))}
         </div>
       ) : (
-        <div class="text-center py-16 rounded-xl border border-border border-dashed">
-          <p class="text-text-muted">
-            No posts yet. Check back soon for articles on AI, product
-            development, and the startup journey.
-          </p>
-        </div>
+        <p class="text-text-muted/50 text-sm font-mono py-16 text-center">
+          No posts yet. Check back soon.
+        </p>
       )
     }
   </div>

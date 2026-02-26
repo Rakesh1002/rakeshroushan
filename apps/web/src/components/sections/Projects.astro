@@ -6,196 +6,134 @@ interface Project {
   description: string;
   url?: string;
   tags: string[];
-  category: string;
   status: "live" | "building" | "beta";
+  flagship?: boolean;
 }
 
 const projects: Project[] = [
   {
     name: "AudioPod AI",
-    description: "Unified AI audio workstation — speaker diarization, noise reduction, stem splitting, voice cloning, and translation. Canva for Audio.",
+    description: "Unified AI audio workstation — diarization, noise reduction, stem splitting, voice cloning, translation.",
     url: "https://audiopod.ai",
-    tags: ["AI/ML", "Audio", "SaaS"],
-    category: "VoiceAI",
+    tags: ["AI/ML", "Audio"],
     status: "live",
+    flagship: true,
   },
   {
     name: "AgentDrive",
-    description: "AI agent framework built on Cloudflare Workers. Build, deploy, and monitor AI agents at the edge with near-zero latency.",
+    description: "AI agent framework on Cloudflare Workers. Build, deploy, and monitor agents at the edge.",
     url: "https://agentdrive.sh",
-    tags: ["AI Agents", "DevTools", "Cloudflare"],
-    category: "DevToolsAI",
+    tags: ["AI Agents", "DevTools"],
     status: "live",
   },
   {
     name: "Findable",
-    description: "AI-powered search and discovery platform. Help users find exactly what they need with semantic search and intelligent recommendations.",
+    description: "AI-powered search and discovery platform. Semantic search and intelligent recommendations.",
     url: "https://findable.sh",
-    tags: ["Search", "AI/ML", "SaaS"],
-    category: "SearchAI",
+    tags: ["Search", "AI/ML"],
     status: "live",
+    flagship: true,
   },
   {
     name: "Go2.gg",
-    description: "Modern URL shortener with analytics — custom domains, detailed click tracking, and developer-friendly API. Built on Cloudflare edge.",
+    description: "URL shortener with analytics — custom domains, click tracking, developer API. Built on CF edge.",
     url: "https://go2.gg",
-    tags: ["DevTools", "Analytics", "SaaS"],
-    category: "DevToolsAI",
+    tags: ["DevTools", "Analytics"],
     status: "live",
   },
   {
     name: "NameMyApp",
-    description: "AI-powered name generator for startups, products, and domains. Get creative, brandable names with instant domain availability checks.",
+    description: "AI name generator for startups and products. Brandable names with domain availability.",
     url: "https://namemy.app",
-    tags: ["AI/ML", "Branding", "Tools"],
-    category: "ContentAI",
+    tags: ["AI/ML", "Tools"],
     status: "live",
   },
   {
     name: "MailMolt",
-    description: "Email warm-up and deliverability service. Improve sender reputation, land in primary inbox, and monitor email health automatically.",
+    description: "Email warm-up and deliverability. Improve sender reputation, land in primary inbox.",
     url: "https://mailmolt.com",
-    tags: ["Email", "DevTools", "SaaS"],
-    category: "DevToolsAI",
+    tags: ["Email", "SaaS"],
     status: "live",
   },
   {
     name: "ClawOcean",
-    description: "Web scraping and data extraction API. Clean, structured data from any website with AI-powered parsing and anti-bot handling.",
+    description: "Web scraping API. Structured data from any website with AI parsing and anti-bot handling.",
     url: "https://clawocean.com",
-    tags: ["Data", "API", "DevTools"],
-    category: "DevToolsAI",
+    tags: ["Data", "API"],
     status: "live",
   },
   {
     name: "AudioWhisper",
-    description: "AI meeting notes and ultrafast dictation. Transcribe meetings with speaker detection, generate summaries, and real-time voice-to-text.",
+    description: "AI meeting notes and ultrafast dictation. Speaker detection, summaries, real-time voice-to-text.",
     url: "https://audiowhisper.com",
-    tags: ["AI/ML", "Audio", "Productivity"],
-    category: "VoiceAI",
+    tags: ["AI/ML", "Audio"],
     status: "building",
   },
   {
     name: "UnSearch",
-    description: "RAG in 5 minutes, not 5 weeks. Complete Retrieval Augmented Generation API with document upload, semantic search, and AI answers.",
+    description: "RAG in 5 minutes. Document upload, semantic search, AI answers — complete API.",
     url: "https://unsearch.ai",
-    tags: ["RAG", "AI/ML", "API"],
-    category: "SearchAI",
+    tags: ["RAG", "API"],
     status: "building",
   },
   {
     name: "Competely",
-    description: "AI-powered competitor monitoring for SaaS. Track website changes, pricing updates, and feature launches. Get Slack alerts and battlecards.",
+    description: "AI competitor monitoring. Track website changes, pricing updates, feature launches.",
     url: "https://competely.ai",
-    tags: ["AI/ML", "Intelligence", "SaaS"],
-    category: "SearchAI",
+    tags: ["Intelligence", "SaaS"],
     status: "building",
   },
   {
     name: "ShipQuest",
-    description: "Production-ready SaaS boilerplate — Next.js + Cloudflare stack with auth, payments, AI, and analytics. Ship in a weekend.",
+    description: "Production-ready SaaS boilerplate. Next.js + Cloudflare with auth, payments, AI.",
     url: "https://shipquest.dev",
-    tags: ["Boilerplate", "DevTools", "SaaS"],
-    category: "DevToolsAI",
+    tags: ["Boilerplate", "DevTools"],
     status: "live",
   },
   {
     name: "Legally",
-    description: "AI contract review — upload any contract, get plain English summary with risk highlights and clause-by-clause breakdown in 60 seconds.",
-    tags: ["AI/ML", "Legal", "SaaS"],
-    category: "BizToolsAI",
+    description: "AI contract review. Plain English summary with risk highlights in 60 seconds.",
+    tags: ["AI/ML", "Legal"],
     status: "building",
   },
 ];
-
-const statusColors = {
-  live: { bg: "bg-green-500/10", text: "text-green-400", label: "Live" },
-  building: { bg: "bg-yellow-500/10", text: "text-yellow-400", label: "Building" },
-  beta: { bg: "bg-blue-500/10", text: "text-blue-400", label: "Beta" },
-};
 ---
 
-<section id="projects" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <div class="flex items-center justify-between mb-12">
-      <div>
-        <h2 class="text-3xl font-bold mb-4">Products</h2>
-        <p class="text-text-muted">
-          Building a portfolio of AI-powered products at <a href={socials.studio} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Roushan Venture Studio</a>.
-        </p>
-      </div>
-      <a
-        href={socials.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors"
-      >
-        Open source
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
-        </svg>
-      </a>
-    </div>
+<section id="projects" class="py-28 px-6">
+  <div class="mx-auto max-w-5xl">
+    <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+      <span class="text-accent">#</span> shipped
+    </p>
+    <p class="text-text-muted text-sm mb-10">
+      Building at <a href={socials.studio} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Roushan Venture Studio</a>
+    </p>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
       {projects.map((project) => {
-        const status = statusColors[project.status];
         const Tag = project.url ? "a" : "div";
         return (
           <Tag
             href={project.url}
             target={project.url ? "_blank" : undefined}
             rel={project.url ? "noopener noreferrer" : undefined}
-            class="group block p-5 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
+            class="group block p-4 rounded-lg bg-bg-card hover:bg-bg-secondary transition-colors"
           >
-            <div class="flex items-start justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <h3 class="font-semibold group-hover:text-accent transition-colors">
-                  {project.name}
-                </h3>
-                <span class={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${status.bg} ${status.text}`}>
-                  {status.label}
-                </span>
-              </div>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-sm font-medium group-hover:text-accent transition-colors">
+                {project.name}
+              </h3>
+              <span class={`inline-block w-1.5 h-1.5 rounded-full shrink-0 ${
+                project.status === "live" ? "bg-emerald-500" : "bg-yellow-500/60"
+              }`} />
               {project.url && (
-                <svg
-                  class="w-4 h-4 text-text-muted shrink-0 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                  />
+                <svg class="w-3 h-3 text-text-muted/30 ml-auto shrink-0 group-hover:text-text-muted transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               )}
             </div>
-            <p class="text-sm text-text-muted mb-4 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-text-muted leading-relaxed line-clamp-2">
               {project.description}
             </p>
-            <div class="flex items-center gap-3 text-xs text-text-muted">
-              <span class="text-[10px] uppercase tracking-wider text-text-muted/60">{project.category}</span>
-              <span class="text-border">|</span>
-              <div class="flex flex-wrap gap-1.5">
-                {project.tags.slice(0, 2).map((tag) => (
-                  <span class="px-1.5 py-0.5 rounded bg-bg-secondary">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
           </Tag>
         );
       })}

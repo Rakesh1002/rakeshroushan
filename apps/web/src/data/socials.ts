@@ -8,7 +8,8 @@ export const socials = {
 
 export const siteConfig = {
   name: "Rakesh Roushan",
-  title: "Entrepreneur, Product Leader & AI Innovator",
+  title: "Building 20+ AI Products as a Solo Founder",
   location: "Bengaluru, India",
-  bio: "Building a portfolio of AI-powered products at Roushan Venture Studio. Previously led product and growth at Paytm, Ninjacart, and Bharti Airtel. IIM Calcutta MBA.",
+  bio: "Founder of Roushan Venture Studio — shipping AI-powered SaaS across voice, search, dev tools, and business automation. Ex-Paytm, Ninjacart, Airtel. IIM Calcutta.",
+  tagline: "I build AI products, write about what works, and share the frameworks.",
 } as const;

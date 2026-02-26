@@ -1,0 +1,42 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/sections/Nav.astro";
+import Footer from "@/components/sections/Footer.astro";
+import MoatCalculator from "@/components/MoatCalculator";
+---
+
+<Base
+  title="AI Product Moat Calculator - Rakesh Roushan"
+  description="Score your AI product's defensibility across 5 moat layers. Find out if you're building a fortress or a wrapper."
+>
+  <Nav />
+  <div class="min-h-screen pt-28 pb-24 px-6">
+    <div class="mx-auto max-w-4xl">
+      <a href="/" class="text-sm text-text-muted hover:text-text transition-colors mb-8 inline-block">&larr; Back</a>
+
+      <h1 class="text-4xl font-bold mb-4">AI Product Moat Calculator</h1>
+      <p class="text-text-muted mb-4 leading-relaxed max-w-2xl">
+        Most AI products are thin wrappers around foundation models. This free assessment scores your product's defensibility across 5 critical moat layers &mdash; Speed, Workflow, Integration, Data, and Distribution &mdash; so you know exactly where to invest next.
+      </p>
+      <p class="text-text-secondary text-sm mb-12 max-w-2xl">
+        Answer 10 quick questions (2 per layer), get your Moat Score out of 20, and share your results. Takes under 2 minutes.
+      </p>
+
+      <MoatCalculator client:idle />
+
+      <div class="mt-20 pt-12 border-t border-border/50 max-w-2xl">
+        <h2 class="text-xl font-semibold mb-4">Why moats matter for AI products</h2>
+        <p class="text-text-secondary text-sm leading-relaxed mb-4">
+          When the underlying model improves, every product built on it gets better for free. That means your feature advantage evaporates with each API update. The only durable advantage comes from layers that compound independently of the model: proprietary data, deep integrations, workflow lock-in, distribution loops, and speed infrastructure.
+        </p>
+        <a
+          href="/blog/ai-wrapper-moat"
+          class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+        >
+          Read the full breakdown: Your AI Product is a Wrapper. Here's How to Build a Moat &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Base>

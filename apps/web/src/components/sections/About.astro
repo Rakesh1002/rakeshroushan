@@ -3,87 +3,65 @@ const ventures = [
   {
     name: "Roushan Venture Studio",
     role: "Founder",
-    description:
-      "Building 20+ AI-powered SaaS products across voice, search, content, dev tools, and business automation.",
+    description: "Building 20+ AI-powered SaaS products across voice, search, content, dev tools, and business automation.",
     url: "https://roushan.xyz",
   },
   {
     name: "AudioPod AI",
     role: "Founder",
-    description:
-      "Unified AI audio workstation — Like Canva for Audio. Seamless tools for content creators.",
+    description: "Unified AI audio workstation — Like Canva for Audio. Seamless tools for content creators.",
     url: "https://audiopod.ai",
   },
 ];
 
-const expertise = [
-  "Product Strategy & 0-1 Builds",
-  "AI/ML Product Development",
-  "Growth & Distribution",
-  "Startup Operations & Leadership",
+const credentials = [
+  "IIM Calcutta MBA",
+  "Ex-Paytm (DGM, Soundbox)",
+  "Ex-Ninjacart (Strategy & Growth)",
+  "Ex-Bharti Airtel (500cr+ P&L)",
 ];
 ---
 
-<section id="about" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <h2 class="text-3xl font-bold mb-4">About</h2>
-    <p class="text-text-muted max-w-2xl mb-12 leading-relaxed">
-      With a proven track record across leading Indian startups and corporates,
-      I've held strategic roles in product, marketing, and business growth.
-      Now building the future at the intersection of AI and scalable SaaS.
+<section id="about" class="py-28 px-6">
+  <div class="mx-auto max-w-5xl">
+    <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+      <span class="text-accent">#</span> about
     </p>
 
-    <!-- Ventures -->
-    <div class="grid md:grid-cols-2 gap-6 mb-16">
-      {
-        ventures.map((v) => (
-          <a
-            href={v.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group block p-6 rounded-xl border border-border hover:border-border-hover bg-bg-card transition-all"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-medium text-accent uppercase tracking-wider">
-                {v.role}
-              </span>
-              <svg
-                class="w-4 h-4 text-text-muted group-hover:text-text transition-colors"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-              {v.name}
-            </h3>
-            <p class="text-text-muted text-sm leading-relaxed">
-              {v.description}
-            </p>
-          </a>
-        ))
-      }
+    <p class="text-text-secondary max-w-2xl mb-10 leading-relaxed">
+      Left corporate to build AI products full-time.
+      After leading product at Paytm, Ninjacart, and Airtel,
+      I now ship 20+ products from a solo venture studio.
+    </p>
+
+    <!-- Credentials — inline, quiet -->
+    <div class="flex flex-wrap gap-2 mb-14">
+      {credentials.map((cred) => (
+        <span class="font-mono text-xs text-text-muted px-2.5 py-1 rounded bg-bg-secondary">
+          {cred}
+        </span>
+      ))}
     </div>
 
-    <!-- Expertise -->
-    <h3 class="text-lg font-semibold mb-4 text-text-secondary">
-      Core Expertise
-    </h3>
-    <div class="flex flex-wrap gap-3">
-      {
-        expertise.map((skill) => (
-          <span class="px-4 py-2 rounded-lg bg-bg-secondary border border-border text-sm text-text-secondary">
-            {skill}
-          </span>
-        ))
-      }
+    <!-- Ventures -->
+    <div class="grid md:grid-cols-2 gap-4">
+      {ventures.map((v) => (
+        <a
+          href={v.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block p-5 rounded-lg bg-bg-card hover:bg-bg-card/80 transition-colors"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] text-accent uppercase tracking-widest">{v.role}</span>
+            <svg class="w-3.5 h-3.5 text-text-muted/40 group-hover:text-text-muted transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </div>
+          <h3 class="font-semibold mb-1.5 group-hover:text-accent transition-colors">{v.name}</h3>
+          <p class="text-sm text-text-muted leading-relaxed">{v.description}</p>
+        </a>
+      ))}
     </div>
   </div>
 </section>

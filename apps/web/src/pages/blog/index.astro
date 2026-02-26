@@ -14,54 +14,47 @@ const posts = (await getCollection("posts"))
   description="Thoughts on AI, product development, and the startup journey."
 >
   <Nav />
-  <main class="pt-28 pb-24 px-6">
+  <main class="min-h-screen pt-28 pb-24 px-6">
     <div class="mx-auto max-w-4xl">
-      <h1 class="text-4xl font-bold mb-4">Blog</h1>
-      <p class="text-text-muted mb-12">
+      <a href="/" class="font-mono text-xs text-text-muted hover:text-accent transition-colors mb-8 inline-block">&larr; ~/home</a>
+
+      <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+        <span class="text-accent">#</span> blog
+      </p>
+      <p class="text-text-secondary text-sm mb-16 leading-relaxed">
         Writing about building products, AI, and lessons from the startup trenches.
       </p>
 
       {
         posts.length > 0 ? (
-          <div class="space-y-6">
+          <div class="space-y-1">
             {posts.map((post) => (
               <a
                 href={`/blog/${post.id}`}
-                class="group block p-6 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
+                class="group block py-4 border-b border-border/50 last:border-0"
               >
-                <div class="flex items-center gap-4 mb-2">
-                  <time class="text-xs text-text-muted">
+                <div class="flex items-baseline justify-between gap-4 mb-1.5">
+                  <h2 class="text-sm font-medium group-hover:text-accent transition-colors">
+                    {post.data.title}
+                  </h2>
+                  <time class="text-xs text-text-muted/40 font-mono shrink-0">
                     {post.data.date.toLocaleDateString("en-US", {
                       year: "numeric",
-                      month: "long",
+                      month: "short",
                       day: "numeric",
                     })}
                   </time>
-                  {post.data.tags && (
-                    <div class="flex gap-2">
-                      {post.data.tags.slice(0, 3).map((tag: string) => (
-                        <span class="text-xs px-2 py-0.5 rounded bg-bg-secondary text-text-muted">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                 </div>
-                <h2 class="text-xl font-semibold group-hover:text-accent transition-colors mb-2">
-                  {post.data.title}
-                </h2>
-                <p class="text-text-muted text-sm leading-relaxed">
+                <p class="text-xs text-text-muted leading-relaxed line-clamp-1">
                   {post.data.description}
                 </p>
               </a>
             ))}
           </div>
         ) : (
-          <div class="text-center py-20 rounded-xl border border-border border-dashed">
-            <p class="text-text-muted">
-              No posts yet. Check back soon.
-            </p>
-          </div>
+          <p class="text-text-muted/50 text-sm font-mono py-20 text-center">
+            No posts yet. Check back soon.
+          </p>
         )
       }
     </div>

@@ -1,0 +1,546 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/sections/Nav.astro";
+import Footer from "@/components/sections/Footer.astro";
+
+const features = [
+  {
+    title: "Semantic Search",
+    description: "Go beyond keywords. Understand the meaning behind queries and return results that match user intent, not just exact phrases.",
+    icon: "search",
+  },
+  {
+    title: "Auto-Indexing",
+    description: "Point Findable at your content and it indexes everything automatically. New content is detected and indexed in real-time.",
+    icon: "bolt",
+  },
+  {
+    title: "Intent Detection",
+    description: "Classify whether a user is looking for information, navigating to a page, or ready to take action -- and adapt results accordingly.",
+    icon: "brain",
+  },
+  {
+    title: "Faceted Filtering",
+    description: "Combine semantic search with structured filters. Let users narrow results by category, date, type, or any custom attribute.",
+    icon: "filter",
+  },
+  {
+    title: "Analytics Dashboard",
+    description: "Understand what your users search for, what they find, and where they drop off. Identify content gaps and optimize.",
+    icon: "chart",
+  },
+  {
+    title: "API-First",
+    description: "Every feature is available via a clean REST API. Build custom search experiences or integrate into existing workflows.",
+    icon: "code",
+  },
+];
+
+const pipelineSteps = [
+  { step: "01", title: "Ingest", description: "Documents uploaded via API or auto-crawled from your site" },
+  { step: "02", title: "Embed", description: "Content chunked and converted to vector embeddings" },
+  { step: "03", title: "Store", description: "Vectors indexed in high-performance vector database" },
+  { step: "04", title: "Query", description: "Users search with natural language queries" },
+  { step: "05", title: "Rerank", description: "LLM reranks results for maximum relevance" },
+  { step: "06", title: "Return", description: "Ranked results delivered in milliseconds" },
+];
+
+const useCases = [
+  {
+    title: "Documentation Search",
+    description: "Help developers find the right API reference, guide, or tutorial instantly. Reduce support tickets by making docs discoverable.",
+    icon: "doc",
+  },
+  {
+    title: "E-commerce Discovery",
+    description: "Let shoppers describe what they want in plain English. Surface the perfect product even when they don't know the exact name.",
+    icon: "cart",
+  },
+  {
+    title: "Knowledge Base",
+    description: "Make internal knowledge findable. Search across Notion, Confluence, Google Docs, and Slack simultaneously.",
+    icon: "book",
+  },
+  {
+    title: "Support Ticket Routing",
+    description: "Automatically match incoming tickets to relevant knowledge articles and route to the right team based on semantic understanding.",
+    icon: "ticket",
+  },
+];
+
+const integrations = [
+  {
+    name: "REST API",
+    description: "Full-featured API with authentication, rate limiting, and webhooks. Works with any language or framework.",
+    code: `curl -X POST https://api.findable.sh/v1/search \\
+  -H "Authorization: Bearer fnd_..." \\
+  -d '{"query": "how to deploy", "limit": 10}'`,
+  },
+  {
+    name: "JavaScript SDK",
+    description: "Type-safe SDK for Node.js and browser environments. Handles auth, retries, and streaming automatically.",
+    code: `import { Findable } from '@findable/sdk';
+
+const client = new Findable({ apiKey: 'fnd_...' });
+const results = await client.search('how to deploy');`,
+  },
+  {
+    name: "React Component",
+    description: "Drop-in search UI component with autocomplete, highlighting, and keyboard navigation. Fully customizable.",
+    code: `import { SearchBox } from '@findable/react';
+
+<SearchBox
+  apiKey="fnd_..."
+  indexId="docs"
+  placeholder="Search documentation..."
+/>`,
+  },
+];
+---
+
+<Base
+  title="Findable - Search That Understands Intent | Rakesh Roushan"
+  description="Findable is an AI-powered search and discovery platform with semantic search, vector embeddings, and LLM reranking for documentation, e-commerce, and knowledge bases."
+>
+  <Nav />
+
+  <main class="not-prose">
+    <!-- Back link -->
+    <div class="pt-24 pb-4 px-6">
+      <div class="mx-auto max-w-6xl">
+        <a
+          href="/#projects"
+          class="inline-flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Back to Products
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative py-20 px-6 overflow-hidden">
+      <!-- Gradient background -->
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,oklch(0.205_0.05_41.116),transparent_60%)]"></div>
+
+      <div class="relative z-10 mx-auto max-w-6xl text-center">
+        <!-- Status badge -->
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-sm text-text-muted">
+          <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+          Live
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+          <span class="bg-gradient-to-r from-accent to-orange-400 bg-clip-text text-transparent">Findable</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-text-secondary font-medium mb-4">
+          Search That Understands Intent
+        </p>
+
+        <p class="text-base md:text-lg text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+          AI-powered search and discovery platform. Replace keyword search with semantic understanding that actually finds what your users are looking for.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="https://findable.sh"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2"
+          >
+            Try Findable
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </a>
+          <a
+            href="#how-it-works"
+            class="px-6 py-3 border border-border hover:border-border-hover text-text-secondary hover:text-text rounded-lg font-medium transition-colors"
+          >
+            See how it works
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="py-20 px-6 border-t border-border/50">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-4 block">The Problem</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+              Traditional search is broken
+            </h2>
+            <p class="text-text-muted leading-relaxed mb-6">
+              Keyword-based search forces users to guess the exact words your content uses. They type "how to fix deployment errors" but your docs say "troubleshooting CI/CD pipelines." Result? Zero matches, frustrated users, and support tickets.
+            </p>
+            <p class="text-text-muted leading-relaxed">
+              Even with fuzzy matching and synonyms, traditional search engines fundamentally cannot understand what a user means -- only what they type.
+            </p>
+          </div>
+          <div class="space-y-4">
+            <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium">Keyword Search</span>
+              </div>
+              <div class="p-3 rounded-lg bg-bg-secondary border border-border mb-3">
+                <p class="text-sm font-mono text-text-muted">"fix deployment errors"</p>
+              </div>
+              <div class="p-3 rounded-lg bg-red-500/5 border border-red-500/20">
+                <p class="text-sm text-red-300">0 results found</p>
+                <p class="text-xs text-text-muted mt-1">No documents contain the exact phrase "fix deployment errors"</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl border border-accent/30 bg-accent/5">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium text-accent">Findable</span>
+              </div>
+              <div class="p-3 rounded-lg bg-bg-secondary border border-border mb-3">
+                <p class="text-sm font-mono text-text-muted">"fix deployment errors"</p>
+              </div>
+              <div class="p-3 rounded-lg bg-green-500/5 border border-green-500/20">
+                <p class="text-sm text-green-300">5 relevant results</p>
+                <p class="text-xs text-text-muted mt-1">Matched "Troubleshooting CI/CD Pipelines", "Deploy Error Codes", and 3 more</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="py-20 px-6 border-t border-border/50 bg-bg-secondary/30">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="order-2 md:order-1">
+            <div class="p-6 rounded-2xl border border-border bg-bg/80">
+              <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-xs font-mono text-accent">1</div>
+                  <div class="flex-1 h-px bg-border"></div>
+                  <span class="text-xs text-text-muted">Vector Embeddings</span>
+                </div>
+                <div class="p-3 rounded-lg bg-bg-secondary border border-border">
+                  <p class="text-xs font-mono text-text-muted mb-1">Document</p>
+                  <p class="text-sm">"Troubleshooting CI/CD Pipelines"</p>
+                  <p class="text-xs font-mono text-accent mt-2">[0.234, -0.891, 0.445, ...]</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-xs font-mono text-accent">2</div>
+                  <div class="flex-1 h-px bg-border"></div>
+                  <span class="text-xs text-text-muted">Semantic Matching</span>
+                </div>
+                <div class="p-3 rounded-lg bg-bg-secondary border border-border">
+                  <p class="text-xs font-mono text-text-muted mb-1">Query</p>
+                  <p class="text-sm">"fix deployment errors"</p>
+                  <p class="text-xs font-mono text-green-400 mt-2">Cosine similarity: 0.94</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-xs font-mono text-accent">3</div>
+                  <div class="flex-1 h-px bg-border"></div>
+                  <span class="text-xs text-text-muted">LLM Reranking</span>
+                </div>
+                <div class="p-3 rounded-lg bg-green-500/5 border border-green-500/20">
+                  <p class="text-xs font-mono text-text-muted mb-1">Result</p>
+                  <p class="text-sm text-green-300">Best match with 94% confidence</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <span class="text-xs uppercase tracking-widest text-green-400 font-semibold mb-4 block">The Solution</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+              Semantic search that actually works
+            </h2>
+            <p class="text-text-muted leading-relaxed mb-6">
+              Findable converts your documents and user queries into vector embeddings -- numerical representations of meaning. When a user searches, we find documents with similar meaning, not just matching words.
+            </p>
+            <p class="text-text-muted leading-relaxed mb-6">
+              Then we go a step further: an LLM reranker evaluates the top results for true relevance, considering context, recency, and user intent. The result is search that feels like magic.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              {["Vector Embeddings", "LLM Reranking", "Intent Classification", "Real-time Indexing"].map((tag) => (
+                <span class="px-3 py-1.5 rounded-lg bg-bg-card border border-border text-sm text-text-secondary">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-20 px-6 border-t border-border/50">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+          <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-4 block">Features</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need for intelligent search</h2>
+          <p class="text-text-muted max-w-2xl mx-auto">
+            From indexing to analytics, Findable handles the entire search stack so you can focus on your product.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div class="group p-6 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all">
+              <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                {feature.icon === "search" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                )}
+                {feature.icon === "bolt" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                  </svg>
+                )}
+                {feature.icon === "brain" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+                  </svg>
+                )}
+                {feature.icon === "filter" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                  </svg>
+                )}
+                {feature.icon === "chart" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  </svg>
+                )}
+                {feature.icon === "code" && (
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                  </svg>
+                )}
+              </div>
+              <h3 class="font-semibold mb-2 group-hover:text-accent transition-colors">{feature.title}</h3>
+              <p class="text-sm text-text-muted leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works (Pipeline) -->
+    <section id="how-it-works" class="py-20 px-6 border-t border-border/50 bg-bg-secondary/30">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+          <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-4 block">How It Works</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">The search pipeline</h2>
+          <p class="text-text-muted max-w-2xl mx-auto">
+            From document ingestion to result delivery -- six stages that turn raw content into intelligent, relevant search.
+          </p>
+        </div>
+
+        <!-- Pipeline flow -->
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {pipelineSteps.map((step, i) => (
+            <div class="relative">
+              <div class="p-5 rounded-xl border border-border bg-bg-card/50 h-full">
+                <div class="text-xs font-mono text-accent mb-3">{step.step}</div>
+                <h3 class="font-semibold mb-2 text-sm">{step.title}</h3>
+                <p class="text-xs text-text-muted leading-relaxed">{step.description}</p>
+              </div>
+              {i < pipelineSteps.length - 1 && (
+                <div class="hidden lg:flex absolute top-1/2 -right-2 -translate-y-1/2 z-10">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Expanded visual pipeline -->
+        <div class="mt-12 p-6 rounded-2xl border border-border bg-bg-card/30">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 rounded-xl bg-bg-secondary border border-border flex items-center justify-center">
+                <svg class="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+              </div>
+              <span class="text-xs text-text-muted">Documents</span>
+            </div>
+
+            <svg class="w-8 h-4 text-border rotate-90 md:rotate-0 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                </svg>
+              </div>
+              <span class="text-xs text-text-muted">Embeddings</span>
+            </div>
+
+            <svg class="w-8 h-4 text-border rotate-90 md:rotate-0 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                </svg>
+              </div>
+              <span class="text-xs text-text-muted">Vector DB</span>
+            </div>
+
+            <svg class="w-8 h-4 text-border rotate-90 md:rotate-0 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                </svg>
+              </div>
+              <span class="text-xs text-text-muted">LLM Reranker</span>
+            </div>
+
+            <svg class="w-8 h-4 text-border rotate-90 md:rotate-0 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span class="text-xs text-text-muted">Results</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Options -->
+    <section class="py-20 px-6 border-t border-border/50">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+          <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-4 block">Integration</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Three ways to integrate</h2>
+          <p class="text-text-muted max-w-2xl mx-auto">
+            Use the REST API for full control, the JavaScript SDK for rapid development, or drop in the React component for instant search UI.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {integrations.map((integration) => (
+            <div class="p-6 rounded-xl border border-border bg-bg-card/50 flex flex-col">
+              <h3 class="font-semibold mb-2">{integration.name}</h3>
+              <p class="text-sm text-text-muted mb-4 leading-relaxed">{integration.description}</p>
+              <div class="mt-auto p-4 rounded-lg bg-bg-secondary border border-border overflow-x-auto">
+                <pre class="text-xs font-mono text-text-secondary leading-relaxed whitespace-pre-wrap break-all"><code>{integration.code}</code></pre>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 px-6 border-t border-border/50 bg-bg-secondary/30">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+          <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-4 block">Use Cases</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Built for every search problem</h2>
+          <p class="text-text-muted max-w-2xl mx-auto">
+            Whether you're building documentation, an e-commerce store, or internal tools -- Findable adapts to your domain.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {useCases.map((useCase) => (
+            <div class="group p-6 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                  {useCase.icon === "doc" && (
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                  )}
+                  {useCase.icon === "cart" && (
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                  )}
+                  {useCase.icon === "book" && (
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                    </svg>
+                  )}
+                  {useCase.icon === "ticket" && (
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                    </svg>
+                  )}
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2 group-hover:text-accent transition-colors">{useCase.title}</h3>
+                  <p class="text-sm text-text-muted leading-relaxed">{useCase.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 px-6 border-t border-border/50">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Ready to upgrade your search?
+        </h2>
+        <p class="text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+          Stop losing users to bad search results. Findable gives you semantic search that understands what your users actually mean -- in minutes, not months.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="https://findable.sh"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-colors text-lg inline-flex items-center gap-2"
+          >
+            Try Findable -- Free
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </a>
+          <a
+            href="/#projects"
+            class="px-8 py-4 border border-border hover:border-border-hover text-text-secondary hover:text-text rounded-lg font-medium transition-colors text-lg"
+          >
+            View all products
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

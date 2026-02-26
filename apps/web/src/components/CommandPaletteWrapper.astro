@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import CommandPalette from "./CommandPalette";
+
+const posts = (await getCollection("posts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    url: `/blog/${p.id}`,
+    tags: p.data.tags ?? [],
+  }));
+
+// Get projects from the Projects component data
+const projects = [
+  { title: "AudioPod AI", description: "Unified AI audio workstation — speaker diarization, noise reduction, voice cloning", url: "https://audiopod.ai", tags: ["AI/ML", "Audio", "SaaS"] },
+  { title: "AgentDrive", description: "AI agent framework built on Cloudflare Workers", url: "https://agentdrive.sh", tags: ["AI Agents", "DevTools", "Cloudflare"] },
+  { title: "Findable", description: "AI-powered search and discovery platform", url: "https://findable.sh", tags: ["Search", "AI/ML", "SaaS"] },
+  { title: "Go2.gg", description: "Modern URL shortener with analytics", url: "https://go2.gg", tags: ["DevTools", "Analytics"] },
+  { title: "NameMyApp", description: "AI-powered name generator for startups", url: "https://namemy.app", tags: ["AI/ML", "Branding"] },
+  { title: "MailMolt", description: "Email warm-up and deliverability service", url: "https://mailmolt.com", tags: ["Email", "DevTools"] },
+  { title: "ClawOcean", description: "Web scraping and data extraction API", url: "https://clawocean.com", tags: ["Data", "API"] },
+  { title: "ShipQuest", description: "Production-ready SaaS boilerplate", url: "https://shipquest.dev", tags: ["Boilerplate", "DevTools"] },
+  { title: "UnSearch", description: "RAG in 5 minutes, not 5 weeks", url: "https://unsearch.ai", tags: ["RAG", "AI/ML"] },
+  { title: "Competely", description: "AI-powered competitor monitoring for SaaS", url: "https://competely.ai", tags: ["AI/ML", "Intelligence"] },
+];
+---
+
+<CommandPalette client:idle posts={posts} projects={projects} />

@@ -2,6 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import Nav from "@/components/sections/Nav.astro";
 import Footer from "@/components/sections/Footer.astro";
+import GiscusComments from "@/components/GiscusComments.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -14,58 +15,76 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Reading time estimate
+const wordCount = post.body?.split(/\s+/).length ?? 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 250));
+
+// Get all posts for next/prev
+const allPosts = (await getCollection("posts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
+const postUrl = `https://roushanrakesh.com/blog/${post.id}`;
+const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(postUrl)}&via=buildwithrakesh`;
+const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+
+// BlogPosting structured data
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  url: postUrl,
+  wordCount,
+  timeRequired: `PT${readingTime}M`,
+  author: {
+    "@type": "Person",
+    name: "Rakesh Roushan",
+    url: "https://roushanrakesh.com",
+    jobTitle: "Founder, Roushan Venture Studio",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Rakesh Roushan",
+    url: "https://roushanrakesh.com",
+  },
+  ...(post.data.tags && { keywords: post.data.tags.join(", ") }),
+};
 ---
 
 <Base
   title={`${post.data.title} - Rakesh Roushan`}
   description={post.data.description}
+  image={`/og/${post.id}.png`}
 >
   <Nav />
-  <main class="pt-28 pb-24 px-6">
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  <main class="min-h-screen pt-28 pb-24 px-6">
     <article class="mx-auto max-w-3xl">
-      <a
-        href="/blog"
-        class="inline-flex items-center gap-2 text-sm text-text-muted hover:text-text mb-8 transition-colors"
-      >
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-        </svg>
-        Back to blog
-      </a>
+      <a href="/blog" class="font-mono text-xs text-text-muted hover:text-accent transition-colors mb-8 inline-block">&larr; ~/blog</a>
 
       <header class="mb-12">
-        <time class="text-sm text-text-muted">
-          {
-            post.data.date.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }
-        </time>
-        <h1 class="text-4xl font-bold mt-3 mb-4">{post.data.title}</h1>
-        <p class="text-lg text-text-secondary">{post.data.description}</p>
-
-        {
-          post.data.tags && (
-            <div class="flex flex-wrap gap-2 mt-6">
-              {post.data.tags.map((tag: string) => (
-                <span class="text-xs px-2.5 py-1 rounded-md bg-bg-secondary text-text-muted border border-border">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )
-        }
+        <div class="flex items-center gap-3 font-mono text-xs text-text-muted/40 mb-4">
+          <time datetime={post.data.date.toISOString()}>
+            {
+              post.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })
+            }
+          </time>
+          <span>&middot;</span>
+          <span>{readingTime} min read</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold mt-3 mb-4">{post.data.title}</h1>
+        <p class="text-sm text-text-secondary leading-relaxed">{post.data.description}</p>
       </header>
 
       <div
@@ -73,11 +92,147 @@ const { Content } = await render(post);
           prose-headings:font-semibold
           prose-a:text-accent prose-a:no-underline hover:prose-a:underline
           prose-code:text-accent prose-code:bg-bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-          prose-pre:bg-bg-secondary prose-pre:border prose-pre:border-border prose-pre:rounded-xl"
+          prose-pre:bg-bg-secondary prose-pre:border prose-pre:border-border/50 prose-pre:rounded-lg"
       >
         <Content />
       </div>
+
+      <!-- Newsletter CTA -->
+      <div class="mt-16 py-8 border-t border-border/50">
+        <p class="text-sm font-medium mb-2">Enjoyed this? Get more like it.</p>
+        <p class="text-xs text-text-muted mb-4">
+          Weekly on AI product strategy and execution. No fluff.
+        </p>
+        <form id="blog-newsletter-form" class="flex gap-2">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            class="flex-1 px-3 py-2 rounded bg-bg-secondary text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:ring-1 focus:ring-accent/50 transition-all font-mono"
+          />
+          <button
+            type="submit"
+            id="blog-newsletter-btn"
+            class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-mono rounded transition-colors disabled:opacity-40"
+          >
+            subscribe
+          </button>
+        </form>
+        <p id="blog-newsletter-msg" class="text-[11px] text-text-muted/50 mt-3 font-mono">Unsubscribe anytime.</p>
+      </div>
+
+      <!-- Share -->
+      <div class="mt-8 pt-8 border-t border-border/50">
+        <div class="flex items-center gap-4 font-mono text-xs">
+          <span class="text-text-muted/40">share:</span>
+          <a
+            href={twitterShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text-muted hover:text-accent transition-colors"
+          >
+            twitter
+          </a>
+          <a
+            href={linkedinShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text-muted hover:text-accent transition-colors"
+          >
+            linkedin
+          </a>
+          <button
+            id="copy-url-btn"
+            class="text-text-muted hover:text-accent transition-colors cursor-pointer"
+          >
+            <span id="copy-url-text">copy link</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <GiscusComments term={post.id} />
+
+      <!-- Prev / Next -->
+      {(prevPost || nextPost) && (
+        <nav class="mt-12 pt-8 border-t border-border/50 grid grid-cols-2 gap-4">
+          {prevPost ? (
+            <a
+              href={`/blog/${prevPost.id}`}
+              class="group"
+            >
+              <p class="text-[10px] text-text-muted/40 font-mono mb-1">&larr; prev</p>
+              <p class="text-sm group-hover:text-accent transition-colors line-clamp-1">
+                {prevPost.data.title}
+              </p>
+            </a>
+          ) : <div />}
+          {nextPost ? (
+            <a
+              href={`/blog/${nextPost.id}`}
+              class="group text-right"
+            >
+              <p class="text-[10px] text-text-muted/40 font-mono mb-1">next &rarr;</p>
+              <p class="text-sm group-hover:text-accent transition-colors line-clamp-1">
+                {nextPost.data.title}
+              </p>
+            </a>
+          ) : <div />}
+        </nav>
+      )}
     </article>
   </main>
   <Footer />
 </Base>
+
+<script>
+  // Blog newsletter form
+  const form = document.getElementById("blog-newsletter-form") as HTMLFormElement;
+  const btn = document.getElementById("blog-newsletter-btn") as HTMLButtonElement;
+  const msg = document.getElementById("blog-newsletter-msg") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get("email") as string;
+    if (!email) return;
+    btn.disabled = true;
+    btn.textContent = "Subscribing...";
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        msg.textContent = "You're in! Check your inbox.";
+        msg.classList.remove("text-text-muted");
+        msg.classList.add("text-green-400");
+        form.reset();
+        btn.textContent = "Subscribed";
+      } else {
+        const data = await res.json();
+        msg.textContent = data.error || "Something went wrong.";
+        msg.classList.add("text-red-400");
+        btn.disabled = false;
+        btn.textContent = "Subscribe";
+      }
+    } catch {
+      msg.textContent = "Network error. Try again.";
+      msg.classList.add("text-red-400");
+      btn.disabled = false;
+      btn.textContent = "Subscribe";
+    }
+  });
+
+  // Copy URL button
+  const copyBtn = document.getElementById("copy-url-btn");
+  const copyText = document.getElementById("copy-url-text");
+  copyBtn?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    if (copyText) {
+      copyText.textContent = "Copied!";
+      setTimeout(() => { copyText.textContent = "Copy link"; }, 2000);
+    }
+  });
+</script>

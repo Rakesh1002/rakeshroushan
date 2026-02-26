@@ -1,0 +1,156 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/sections/Nav.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { socials } from "@/data/socials";
+
+const topics = [
+  {
+    title: "Building 20+ AI Products as a Solo Founder",
+    description: "The venture studio model, execution framework, and economics of launching a portfolio of AI products without a team.",
+    tags: ["Keynote", "45 min"],
+    popular: true,
+  },
+  {
+    title: "The Solo Founder's Cloudflare Stack",
+    description: "How to run a multi-product startup on Cloudflare Workers, Pages, D1, R2, and AI — for under $50/month.",
+    tags: ["Technical", "30 min"],
+    popular: false,
+  },
+  {
+    title: "Your AI Wrapper Has No Moat — Here's How to Build One",
+    description: "The 5-layer moat framework for building defensible AI products on top of foundation models.",
+    tags: ["Strategy", "30 min"],
+    popular: true,
+  },
+  {
+    title: "From Corporate PM to Solo Founder",
+    description: "Lessons from leaving a 500cr P&L at Paytm to build AI products full-time. The real economics, psychology, and frameworks.",
+    tags: ["Fireside Chat", "30 min"],
+    popular: false,
+  },
+  {
+    title: "The 'India 2' Product Playbook",
+    description: "Why most Indian startups fail by building for the wrong audience. Lessons from Paytm Soundbox and the emerging 300M market.",
+    tags: ["Market Analysis", "30 min"],
+    popular: false,
+  },
+  {
+    title: "Intent-Based Product Design",
+    description: "Why the search bar is dying, how AI is replacing navigation with intent, and what this means for your product design.",
+    tags: ["Product Design", "25 min"],
+    popular: false,
+  },
+];
+
+const pastAppearances = [
+  { event: "AI Product Builders Meetup, Bengaluru", type: "Talk", year: "2025" },
+  { event: "Cloudflare Developer Week", type: "Workshop", year: "2025" },
+  { event: "IIM Calcutta Alumni Network", type: "Panel", year: "2025" },
+  { event: "IndieHackers Podcast", type: "Interview", year: "2024" },
+];
+---
+
+<Base
+  title="Speaking - Rakesh Roushan"
+  description="Book Rakesh Roushan for speaking engagements on AI product strategy, solo founding, and building at scale."
+>
+  <Nav />
+  <main class="min-h-screen pt-28 pb-24 px-6">
+    <div class="mx-auto max-w-4xl">
+      <a href="/" class="font-mono text-xs text-text-muted hover:text-accent transition-colors mb-8 inline-block">&larr; ~/home</a>
+
+      <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+        <span class="text-accent">#</span> speaking
+      </p>
+      <p class="text-text-secondary text-sm mb-16 max-w-2xl leading-relaxed">
+        I speak about building AI products, the solo founder journey, and frameworks for product strategy. Available for conferences, podcasts, panels, and workshops.
+      </p>
+
+      <!-- Topics -->
+      <section class="mb-16">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> talk topics
+        </p>
+        <div class="space-y-1">
+          {topics.map((topic) => (
+            <div class="py-4 border-b border-border/50 last:border-0">
+              <div class="flex items-baseline justify-between gap-4 mb-1.5">
+                <h3 class="text-sm font-medium">{topic.title}</h3>
+                <span class="font-mono text-xs text-text-muted/40 shrink-0">{topic.tags[1]}</span>
+              </div>
+              <p class="text-xs text-text-muted leading-relaxed">{topic.description}</p>
+              <span class="inline-block mt-2 font-mono text-[10px] text-text-muted/40">{topic.tags[0].toLowerCase()}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Past Appearances -->
+      <section class="mb-16">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> past appearances
+        </p>
+        <div class="space-y-0">
+          {pastAppearances.map((item) => (
+            <div class="flex items-center justify-between py-3 border-b border-border/50 last:border-0">
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-[10px] text-text-muted/40 w-14 shrink-0">{item.type.toLowerCase()}</span>
+                <span class="text-sm">{item.event}</span>
+              </div>
+              <span class="text-xs text-text-muted/40 font-mono shrink-0">{item.year}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- What You Get -->
+      <section class="mb-16">
+        <p class="font-mono text-xs text-text-muted mb-6 tracking-wide">
+          <span class="text-accent">&gt;</span> what you get
+        </p>
+        <div class="space-y-1">
+          <div class="py-3 border-b border-border/50">
+            <p class="text-sm font-medium mb-1">Real Numbers</p>
+            <p class="text-xs text-text-muted">Actual revenue, costs, architecture decisions, and failure post-mortems. No fluff.</p>
+          </div>
+          <div class="py-3 border-b border-border/50">
+            <p class="text-sm font-medium mb-1">Actionable Frameworks</p>
+            <p class="text-xs text-text-muted">Every talk comes with a framework the audience can apply immediately.</p>
+          </div>
+          <div class="py-3 border-b border-border/50 last:border-0">
+            <p class="text-sm font-medium mb-1">Q&A and Follow-Up</p>
+            <p class="text-xs text-text-muted">Extended Q&A sessions. Available for follow-up conversations.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Book Me CTA -->
+      <section class="py-10">
+        <p class="font-mono text-xs text-text-muted mb-4 tracking-wide">
+          <span class="text-accent">&gt;</span> book me
+        </p>
+        <p class="text-text-secondary text-sm mb-6 max-w-lg leading-relaxed">
+          Interested in having me speak at your event, podcast, or workshop?
+        </p>
+        <div class="flex flex-wrap items-center gap-4 font-mono text-sm">
+          <a
+            href={`mailto:${socials.email}?subject=Speaking%20Inquiry`}
+            class="text-accent hover:text-accent-hover transition-colors"
+          >
+            email &rarr;
+          </a>
+          <a
+            href={socials.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text-muted hover:text-text transition-colors"
+          >
+            dm on x &rarr;
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
