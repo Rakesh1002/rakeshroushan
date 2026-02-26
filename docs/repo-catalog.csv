@@ -1,0 +1,68 @@
+name,description,visibility,isFork,lastPushed,branch,language,homepage,stars,forks,category,product,status,action,mergedFrom,notes,mergedInto,mergeTarget
+rakeshroushan,Personal portfolio + strategy docs monorepo,public,False,2026-02-26,main,TypeScript,https://roushanrakesh.com,0,0,personal,Personal Site,active,keep,RR,Astro 6 monorepo on CF Workers. Contains RR strategy docs.,,
+rr-os,Roushan Venture Studio OS + website,private,False,2026-02-26,main,TypeScript,https://roushan.xyz,1,0,venture-studio,Roushan Venture Studio,active,keep,,Investor/builder-facing site + full portfolio OS,,
+RR,RR Holdings - 100 Startups in 100 Days infrastructure,private,False,2026-02-11,main,,,0,0,personal,Personal Site,merged,delete,,Strategy docs merged into rakeshroushan/docs/,rakeshroushan,
+YobiTech,Earlier portfolio site on Vercel,public,False,2026-01-23,main,TypeScript,https://yobi-tech-wine.vercel.app,0,0,personal,Personal Site,superseded,merge,,"Old portfolio site, superseded by rakeshroushan",,rakeshroushan
+ayingwangsha,Public site for Aying Wangsha,public,False,2024-12-19,main,TypeScript,https://ayingwangsha.vercel.app,0,0,client-work,Aying Wangsha Site,active,keep,,Different person's site. Keep standalone.,,
+unsearch,Open-source search API for AI agents. 70+ engines.,public,False,2026-02-17,main,Python,,1,0,search-ai,UnSearch,active,keep,,Canonical repo. unsearch-admin should merge in.,,
+unsearch-admin,Admin dashboard for UnSearch,private,False,2026-02-12,main,Python,,0,0,search-ai,UnSearch,duplicate,merge,,Admin panel — merge into unsearch/apps/admin/,,unsearch
+AudioPod,AudioPod AI — AI audio workstation,private,False,2024-10-24,main,Python,,0,0,audio,AudioPod AI,active,keep,,Canonical AudioPod repo. Merge ap_at and ap_vc_styletts in.,,
+ap_at,AudioPod internal tooling,private,False,2024-11-05,main,Python,,0,0,audio,AudioPod AI,duplicate,merge,,Cryptic name. Merge into AudioPod.,,AudioPod
+ap_vc_styletts,AudioPod voice cloning / StyleTTS,private,False,2024-10-24,main,Python,,0,0,audio,AudioPod AI,duplicate,merge,,StyleTTS experiment. Merge into AudioPod.,,AudioPod
+voice-ai-starter,Batteries-included fullstack template for voice AI applications,private,False,2026-01-26,main,Python,,0,0,audio,Voice AI Starter,active,keep,,Generic template. Independent from AudioPod.,,
+audiowhisper,AudioWhisper - Voice-to-text dictation app for macOS,private,False,2025-12-26,main,TypeScript,,0,0,audio,AudioWhisper,active,keep,,Distinct product from AudioPod.,,
+UnQuest-AI,UnQuest AI knowledge management platform,private,False,2024-08-01,main,TypeScript,https://unquest.ai,0,0,knowledge-ai,UnQuest AI,active,keep,,Canonical repo. Merge unquest-p in.,,
+unquest-p,Private Knowledge engine,private,False,2025-09-21,main,TypeScript,,0,0,knowledge-ai,UnQuest AI,duplicate,merge,,Same product. Merge into UnQuest-AI.,,UnQuest-AI
+Yobi,AI-powered trading and investment platform,public,False,2025-07-25,main,TypeScript,,0,0,fintech,Yobi,active,keep,,Canonical trading platform. Merge YobiMoney in.,,
+YobiMoney,Yobi finance features,public,False,2024-04-10,main,TypeScript,,0,0,fintech,Yobi,duplicate,merge,,Same product family. Merge into Yobi.,,Yobi
+signalist,Stock Market app with Next.js,public,True,2025-09-24,main,TypeScript,https://jsmastery.com,0,0,fintech,Signalist,active,keep,,Fork. Distinct from Yobi.,,
+stockbot-powered-by-groq,Stock bot demo with Groq,private,False,2024-08-20,main,TypeScript,https://stockbot-powered-by-groq-alpha.vercel.app,0,0,fintech,Stockbot,stale,archive,,Demo experiment. Not a product.,,
+go2.gg,The fastest way to share links,public,False,2026-02-02,main,TypeScript,https://go2.gg,0,0,url-shortener,go2.gg,active,keep,,Canonical repo. Merge go2gg_admin and go in.,,
+go2gg_admin,Admin for go2.gg,private,False,2026-02-02,main,TypeScript,,0,0,url-shortener,go2.gg,duplicate,merge,,Admin panel. Merge into go2.gg/apps/admin/,,go2.gg
+go,go2.gg new iteration,private,False,2026-02-26,,,,0,0,url-shortener,go2.gg,duplicate,merge,,Empty repo. Merge or delete.,,go2.gg
+jeet,JEE/NEET prep platform,private,False,2025-12-25,main,Python,,0,0,education,JEET,active,keep,,Standalone education product.,,
+edco,EdCo CRM - Education Consultancy Lead Management System,private,False,2026-01-19,main,TypeScript,,0,0,education,EdCo,active,keep,,Standalone CRM product.,,
+WhatsBy,WhatsApp marketing/support bot,public,False,2025-12-10,main,TypeScript,https://waspy.unquest.ai,0,0,messaging,WhatsBy,active,keep,,Standalone product.,,
+Heya,React Native chat app with LiveKit,public,False,2025-01-24,main,Python,,0,0,messaging,Heya,active,keep,,Standalone mobile app.,,
+findable,Findable — The discovery layer for AI agent skills,private,False,2026-02-24,main,HTML,,0,0,agent-infra,Findable,active,keep,,Standalone product.,,
+agentflare,Multi-tenant AI middleware platform on Cloudflare Edge,private,False,2026-01-24,main,TypeScript,,0,0,agent-infra,AgentFlare,active,keep,,Canonical agent infra. clawocean overlaps — evaluate merge.,,
+clawocean,OpenClaw Made Simple - Multi-tenant SaaS for AI agents,private,False,2026-02-09,main,TypeScript,,0,0,agent-infra,AgentFlare,duplicate,merge,,Overlaps with agentflare. Evaluate merge.,,agentflare
+moltbox,Moltbox,private,False,2026-02-24,main,HTML,,0,0,agent-infra,Moltbox,new,evaluate,,New repo. Evaluate in 30 days.,,
+cursor-azure-proxy,Proxy for Cursor IDE with Azure Anthropic API,private,False,2026-02-18,main,JavaScript,,0,0,dev-tools,Cursor Azure Proxy,active,keep,,Standalone utility.,,
+mailmolt,Email infrastructure for AI agents on Cloudflare,private,False,2026-02-09,main,TypeScript,,0,0,email,MailMolt,active,keep,,Standalone product.,,
+aboutai,AboutAI - AI tools discovery and content platform,public,False,2025-12-25,main,Python,,0,0,content,AboutAI,active,keep,,Standalone content product.,,
+Agency,AI-powered book generation system,private,False,2026-01-31,master,TeX,,0,0,content,Agency,active,keep,,Standalone product.,,
+Tweety,Twitter bot to auto post and reply,public,False,2025-10-16,master,Python,,0,0,content,Tweety,stale,archive,,X API changes likely broke this.,,
+devgrowth,GTM Operating System for Technical Solopreneurs,public,False,2025-12-26,main,TypeScript,,0,0,content,DevGrowth,active,keep,,Standalone GTM product.,,
+flarecode,Full-stack React framework for Cloudflare Workers,public,False,2026-01-24,main,TypeScript,,0,0,dev-tools,FlareCode,active,keep,,Open-source framework.,,
+pseo,Programmatic Utility Engine - 100 AI-proof utility sites,private,False,2026-01-14,main,TypeScript,,0,0,dev-tools,PSEO,active,keep,,Standalone product.,,
+shipquest-boilerplate,ShipQuest boilerplate,private,False,2026-01-12,master,TypeScript,,0,0,dev-tools,ShipQuest,active,keep,,Canonical repo. Merge shipquest-admin in.,,
+shipquest-admin,ShipQuest admin panel,private,False,2026-01-12,main,TypeScript,,0,0,dev-tools,ShipQuest,duplicate,merge,,Admin panel. Merge into shipquest-boilerplate.,,shipquest-boilerplate
+confyui,ComfyUI related,private,False,2026-01-07,main,Python,,0,0,dev-tools,ConfyUI,unclear,evaluate,,Evaluate if active.,,
+buildnative,React Native no-code builder,private,False,2025-12-25,main,TypeScript,,0,0,dev-tools,BuildNative,unclear,evaluate,,Evaluate if active.,,
+Focusly,Pomodoro focus timer for macOS,public,False,2026-02-26,main,,https://focusly.unquest.ai,4,0,apps,Focusly,active,keep,,Canonical repo. Merge focusly_web in.,,
+focusly_web,Focusly web version,private,False,2025-12-10,main,TypeScript,https://focuslyweb.vercel.app,0,0,apps,Focusly,duplicate,merge,,Web version. Merge into Focusly/apps/web/,,Focusly
+tasklister,Task management app with spaces and priorities,public,False,2025-06-26,master,TypeScript,,0,0,apps,TaskLister,active,keep,,Standalone product.,,
+pulsefit,Minimalistic workout rest timer React Native app,public,False,2025-06-24,main,TypeScript,,0,0,apps,PulseFit,active,keep,,Standalone product.,,
+chargefind,ChargeFi nd,private,False,2026-01-14,master,TypeScript,,0,0,apps,ChargeFind,unclear,evaluate,,Evaluate if active.,,
+aura,AI photo generation,public,False,2025-11-27,master,TypeScript,,0,0,apps,Aura,active,keep,,Standalone product.,,
+TryMyLook,Virtual try-on,public,False,2025-02-20,main,TypeScript,https://trymylook.xyz,0,0,apps,TryMyLook,active,keep,,Standalone product.,,
+gamehub,Game hub,public,False,2025-11-27,master,JavaScript,,0,0,apps,GameHub,active,keep,,Standalone product.,,
+telestack,AI-powered phone receptionist for healthcare,public,False,2025-11-27,master,Python,,0,0,apps,TeleStack,active,keep,,Standalone product.,,
+namemyapp,AI startup name generator,private,False,2026-01-26,main,TypeScript,https://app-sigma-ashen-17.vercel.app,0,0,apps,NameMyApp,active,keep,,Standalone utility product.,,
+artise,,private,False,2026-02-26,main,TypeScript,,0,0,new,Artise,new,evaluate,,New repo. Evaluate in 30 days.,,
+riya,,private,False,2026-02-26,main,,,0,0,new,Riya,new,evaluate,,New repo. Evaluate in 30 days.,,
+devdarshan,,private,False,2026-02-26,main,HTML,,0,0,new,DevDarshan,new,evaluate,,New repo. Evaluate in 30 days.,,
+comfy,,private,False,2026-02-26,main,,,0,0,new,Comfy,new,evaluate,,May overlap with confyui. Evaluate.,,
+codecloud,,private,False,2026-02-26,main,TypeScript,,0,0,new,CodeCloud,new,evaluate,,New repo. Evaluate in 30 days.,,
+canvas-editor,,private,False,2026-02-26,main,TypeScript,,0,0,new,Canvas Editor,new,evaluate,,New repo. Evaluate in 30 days.,,
+autopilot_app_ideas,Brainstorming / app ideas,private,False,2026-02-26,main,Python,,0,0,misc,,not-a-product,delete,,"Brainstorming, not code. Use Notion.",,
+Apex,,private,False,2026-02-26,main,HTML,,0,0,new,Apex,new,evaluate,,New repo. Evaluate in 30 days.,,
+ai-influencers,,private,False,2026-02-26,main,JavaScript,,0,0,new,AI Influencers,new,evaluate,,New repo. Evaluate in 30 days.,,
+WriteWell,,private,False,2026-02-26,,,,0,0,new,WriteWell,new,evaluate,,Empty repo. Evaluate in 30 days.,,
+mmrag,StackBlitz prototype,public,False,2024-10-06,main,TypeScript,https://stackblitz.com/edit/sb1-rdf4wn,0,0,misc,,stale,archive,,StackBlitz experiment. Not a product.,,
+polaris-rr,Polaris fork,public,True,2026-01-05,main,TypeScript,,0,0,misc,,fork,delete,,Fork not being maintained.,,
+react-native-apps,Curated List of Open Source React Native Apps,public,True,2025-06-09,master,,https://infinite.red/technologies/react-native,0,0,misc,,fork,delete,,Fork of curated list. Not your product.,,
+nextjs-chat,Next.js chat template,private,False,2024-06-15,main,TypeScript,https://nextjs-chat-virid-psi.vercel.app,0,0,misc,,stale,delete,,Template clone. Not a product.,,
+andromeda,,public,False,2015-10-15,,,,0,0,misc,,stale,archive,,Ancient repo (2015). Archive for history.,,
+vStudio,,private,False,2024-11-30,main,TypeScript,https://vstudio-three.vercel.app,0,0,misc,vStudio,unclear,evaluate,,Has a live Vercel deployment. Evaluate.,,
