@@ -1,0 +1,272 @@
+[
+  {
+    "code": "AboutAI",
+    "name": "AI news aggregator",
+    "slug": "aboutai-news",
+    "one_liner": "AI news aggregator",
+    "category": "media",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Agency",
+    "name": "Ebook Writer",
+    "slug": "agency-ebook-writer",
+    "one_liner": "Ebook writing agency/content engine",
+    "category": "agency",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "AICF",
+    "name": "AI Cofounder",
+    "slug": "ai-cofounder",
+    "one_liner": "Test + validate ideas with an AI cofounder",
+    "category": "founder-tools",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "AP",
+    "name": "AI DAW",
+    "slug": "ap-ai-daw",
+    "one_liner": "AI digital audio workstation",
+    "category": "creator-tools",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "AP-play",
+    "name": "AI audiobooks + podcasts",
+    "slug": "ap-play",
+    "one_liner": "Audiobooks + podcasts with AI",
+    "category": "media",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "AP-Publish",
+    "name": "Ebook publisher",
+    "slug": "ap-publish",
+    "one_liner": "Ebook publisher/publishing workflow",
+    "category": "media",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "appquest",
+    "name": "WebApp BoilerPlate",
+    "slug": "appquest-boilerplate",
+    "one_liner": "Web app boilerplate",
+    "category": "dev-tools",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "BabyPlay",
+    "name": "AI talking plushies for kids",
+    "slug": "babyplay-plushies",
+    "one_liner": "AI talking plushies for kids",
+    "category": "toys",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "BuildNative",
+    "name": "React Native App Builder",
+    "slug": "buildnative-rn-builder",
+    "one_liner": "React Native app builder",
+    "category": "dev-tools",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Darshan",
+    "name": "Live Temples",
+    "slug": "darshan-live-temples",
+    "one_liner": "Live temples / darshan streaming",
+    "category": "spirituality",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "entrepreneurs",
+    "name": "Personal Founder Sites",
+    "slug": "entrepreneurs-founder-sites",
+    "one_liner": "Personal founder sites service",
+    "category": "agency",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Focusly",
+    "name": "Pomodoro app",
+    "slug": "focusly-pomodoro",
+    "one_liner": "Pomodoro focus app",
+    "category": "productivity",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Heya",
+    "name": "AI companion",
+    "slug": "heya-ai-companion",
+    "one_liner": "AI companion app",
+    "category": "consumer-ai",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "JEET",
+    "name": "JEE+NEET Prep B2B2C app",
+    "slug": "jeet-jee-neet",
+    "one_liner": "JEE + NEET prep B2B2C app",
+    "category": "edtech",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "MediChat",
+    "name": "Track Health + AI",
+    "slug": "medichat-health",
+    "one_liner": "Health tracking + AI assistant",
+    "category": "health",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "NMA",
+    "name": "Name Generator",
+    "slug": "nma-name-generator",
+    "one_liner": "Name generator",
+    "category": "naming",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "PulseFit",
+    "name": "Fitness app for coaches",
+    "slug": "pulsefit-coaches",
+    "one_liner": "Fitness app for coaches",
+    "category": "fitness",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Riley",
+    "name": "OF influencers",
+    "slug": "riley-of-influencers",
+    "one_liner": "Tools for OnlyFans influencers",
+    "category": "creator-economy",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Rizz",
+    "name": "Lifestyle pic generator for dating+social apps",
+    "slug": "rizz-lifestyle-pics",
+    "one_liner": "Lifestyle photo generator for dating + social apps",
+    "category": "consumer-ai",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "SavePro",
+    "name": "Simple MF+FD+Gold saver",
+    "slug": "savepro-saver",
+    "one_liner": "Simple MF + FD + Gold saver",
+    "category": "fintech",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "TML",
+    "name": "Try Ons",
+    "slug": "tml-try-ons",
+    "one_liner": "Virtual try-ons",
+    "category": "fashion",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "tweety",
+    "name": "X AutoTwitter",
+    "slug": "tweety-autotwitter",
+    "one_liner": "X auto-posting/automation tool",
+    "category": "social-tools",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "UnQ",
+    "name": "Market Researcher",
+    "slug": "unq-market-researcher",
+    "one_liner": "Market researcher tool/research copilot",
+    "category": "market-research",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "VaaniKosh",
+    "name": "Regional language learner",
+    "slug": "vaanikosh-language-learner",
+    "one_liner": "Regional language learning app",
+    "category": "edtech",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Visio",
+    "name": "AI smart glasses",
+    "slug": "visio-smart-glasses",
+    "one_liner": "AI smart glasses",
+    "category": "hardware",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Whatsby",
+    "name": "WA support+marketing bot",
+    "slug": "whatsby-whatsapp-bot",
+    "one_liner": "WhatsApp support + marketing bot",
+    "category": "b2b-saas",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  },
+  {
+    "code": "Yobi",
+    "name": "Options Screener+Trader",
+    "slug": "yobi-options",
+    "one_liner": "Options screener + trader",
+    "category": "fintech",
+    "status": "idea",
+    "tier": "",
+    "owner": "rakesh"
+  }
+]
