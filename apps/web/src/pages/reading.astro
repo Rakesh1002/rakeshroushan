@@ -1,0 +1,210 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const currentlyReading = [
+  { title: "The Lean Product Playbook", author: "Dan Olsen", genre: "Product Management", progress: 60 },
+  { title: "Atomic Habits", author: "James Clear", genre: "Personal Development", progress: 80 },
+];
+
+const topBooks = [
+  { title: "The Lean Startup", author: "Eric Ries", rating: 5, year: 2023, insight: "The only way to win is to learn faster than anyone else." },
+  { title: "Continuous Discovery Habits", author: "Teresa Torres", rating: 5, year: 2024, insight: "Discovery isn't a phase, it's a continuous habit." },
+  { title: "Turn the Ship Around", author: "David Marquet", rating: 5, year: 2023, insight: "Don't move information to authority, move authority to information." },
+  { title: "Empowered", author: "Marty Cagan", rating: 5, year: 2025, insight: "The most important thing leaders do is hire and develop great people." },
+  { title: "Influence", author: "Robert Cialdini", rating: 5, year: 2024, insight: "People say yes to those they owe, like, and trust — in that order." },
+  { title: "The 7 Habits of Highly Effective People", author: "Stephen Covey", rating: 5, year: 2023, insight: "Most people focus on urgent, not important. Excellence lives in the important-but-not-urgent quadrant." },
+  { title: "Hooked", author: "Nir Eyal", rating: 5, year: 2025, insight: "The Hook Model: Trigger → Action → Variable Reward → Investment." },
+  { title: "Project Hail Mary", author: "Andy Weir", rating: 5, year: 2024, insight: "The universe is harsh, but humans are endlessly resourceful." },
+  { title: "The Three-Body Problem", author: "Liu Cixin", rating: 5, year: 2023, insight: "Survival is the most fundamental drive. Everything else is secondary." },
+  { title: "Meditations", author: "Marcus Aurelius", rating: 4, year: 2023, insight: "The impediment to action advances action. What stands in the way becomes the way." },
+];
+
+const byCategory = [
+  {
+    name: "Product Management & Tech",
+    books: [
+      { title: "Empowered", author: "Marty Cagan", status: "read", rating: 5 },
+      { title: "Hooked", author: "Nir Eyal", status: "read", rating: 5 },
+      { title: "Continuous Discovery Habits", author: "Teresa Torres", status: "read", rating: 5 },
+      { title: "Escaping the Build Trap", author: "Melissa Perri", status: "read", rating: 4 },
+      { title: "Product-Led Growth", author: "Wes Bush", status: "read", rating: 4 },
+      { title: "Inspired", author: "Marty Cagan", status: "queue" },
+      { title: "The Mom Test", author: "Rob Fitzpatrick", status: "queue" },
+    ],
+  },
+  {
+    name: "Business & Entrepreneurship",
+    books: [
+      { title: "The Lean Startup", author: "Eric Ries", status: "read", rating: 5 },
+      { title: "Good to Great", author: "Jim Collins", status: "read", rating: 4 },
+      { title: "The Psychology of Money", author: "Morgan Housel", status: "read", rating: 5 },
+      { title: "Zero to One", author: "Peter Thiel", status: "queue" },
+      { title: "The Hard Thing About Hard Things", author: "Ben Horowitz", status: "queue" },
+    ],
+  },
+  {
+    name: "Leadership & Management",
+    books: [
+      { title: "Turn the Ship Around", author: "David Marquet", status: "read", rating: 5 },
+      { title: "The Five Dysfunctions of a Team", author: "Patrick Lencioni", status: "read", rating: 4 },
+      { title: "High Output Management", author: "Andy Grove", status: "queue" },
+      { title: "Radical Candor", author: "Kim Scott", status: "queue" },
+    ],
+  },
+  {
+    name: "Psychology & Decision Making",
+    books: [
+      { title: "Influence", author: "Robert Cialdini", status: "read", rating: 5 },
+      { title: "Predictably Irrational", author: "Dan Ariely", status: "read", rating: 4 },
+      { title: "Nudge", author: "Richard Thaler", status: "read", rating: 4 },
+      { title: "Thinking, Fast and Slow", author: "Daniel Kahneman", status: "queue" },
+    ],
+  },
+  {
+    name: "Productivity & Focus",
+    books: [
+      { title: "Essentialism", author: "Greg McKeown", status: "read", rating: 4 },
+      { title: "The 7 Habits of Highly Effective People", author: "Stephen Covey", status: "read", rating: 5 },
+      { title: "Getting Things Done", author: "David Allen", status: "read", rating: 4 },
+      { title: "Deep Work", author: "Cal Newport", status: "queue" },
+    ],
+  },
+  {
+    name: "Fiction & Philosophy",
+    books: [
+      { title: "Project Hail Mary", author: "Andy Weir", status: "read", rating: 5 },
+      { title: "The Three-Body Problem", author: "Liu Cixin", status: "read", rating: 5 },
+      { title: "Exhalation", author: "Ted Chiang", status: "read", rating: 4 },
+      { title: "Meditations", author: "Marcus Aurelius", status: "read", rating: 4 },
+      { title: "Dune", author: "Frank Herbert", status: "queue" },
+    ],
+  },
+];
+
+const stats = { total: 35, avgPerYear: 17, tracking: "2023" };
+---
+
+<Base title="Reading List - Rakesh Roushan" description="Books that shaped how I think about products, leadership, and life.">
+  <div class="min-h-screen py-24 px-6">
+    <div class="mx-auto max-w-4xl">
+      <a href="/" class="text-sm text-text-muted hover:text-text transition-colors mb-8 inline-block">&larr; Back</a>
+
+      <h1 class="text-4xl font-bold mb-4">Reading List</h1>
+      <p class="text-text-muted mb-4 leading-relaxed max-w-2xl">
+        Books that shaped how I think about products, leadership, and life.
+        {stats.total} books read since I started tracking in {stats.tracking}.
+      </p>
+
+      <!-- Currently Reading -->
+      <section class="mb-16">
+        <h2 class="text-xl font-semibold mb-6 text-accent">Currently Reading</h2>
+        <div class="grid gap-4">
+          {currentlyReading.map((book) => (
+            <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h3 class="font-semibold">{book.title}</h3>
+                  <p class="text-sm text-text-muted">{book.author} &middot; {book.genre}</p>
+                </div>
+                <span class="text-sm font-mono text-accent">{book.progress}%</span>
+              </div>
+              <div class="w-full h-1.5 bg-bg-secondary rounded-full overflow-hidden">
+                <div class="h-full bg-accent rounded-full" style={`width: ${book.progress}%`} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Top Books -->
+      <section class="mb-16">
+        <h2 class="text-xl font-semibold mb-6">Books That Changed Me</h2>
+        <div class="space-y-4">
+          {topBooks.map((book, i) => (
+            <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-text-muted/30 font-mono shrink-0 w-8">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="font-semibold">{book.title}</h3>
+                  <p class="text-sm text-text-muted mb-2">{book.author} &middot; Read {book.year}</p>
+                  <p class="text-sm text-text-secondary italic">"{book.insight}"</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- By Category -->
+      <section class="mb-16">
+        <h2 class="text-xl font-semibold mb-6">Library</h2>
+        <div class="space-y-8">
+          {byCategory.map((category) => (
+            <div>
+              <h3 class="text-sm font-medium text-text-muted uppercase tracking-wider mb-3">{category.name}</h3>
+              <div class="space-y-2">
+                {category.books.map((book) => (
+                  <div class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-bg-card/50 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <span class={`text-xs px-1.5 py-0.5 rounded ${book.status === 'read' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
+                        {book.status === 'read' ? 'Read' : 'Queue'}
+                      </span>
+                      <div>
+                        <span class="text-sm font-medium">{book.title}</span>
+                        <span class="text-sm text-text-muted ml-2">— {book.author}</span>
+                      </div>
+                    </div>
+                    {book.rating && (
+                      <span class="text-xs text-text-muted font-mono">
+                        {"*".repeat(book.rating)}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Recommendations -->
+      <section class="mb-16">
+        <h2 class="text-xl font-semibold mb-6">My Recommendations</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+            <h3 class="font-semibold mb-3">For New Product Managers</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li>Continuous Discovery Habits — Teresa Torres</li>
+              <li>Hooked — Nir Eyal</li>
+              <li>The Lean Startup — Eric Ries</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+            <h3 class="font-semibold mb-3">For Aspiring Leaders</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li>Turn the Ship Around — David Marquet</li>
+              <li>Radical Candor — Kim Scott</li>
+              <li>High Output Management — Andy Grove</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+            <h3 class="font-semibold mb-3">For People Feeling Stuck</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li>Essentialism — Greg McKeown</li>
+              <li>Atomic Habits — James Clear</li>
+              <li>Range — David Epstein</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-xl border border-border bg-bg-card/50">
+            <h3 class="font-semibold mb-3">For Entrepreneurs</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li>The Lean Startup — Eric Ries</li>
+              <li>Zero to One — Peter Thiel</li>
+              <li>The Hard Thing About Hard Things — Ben Horowitz</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>

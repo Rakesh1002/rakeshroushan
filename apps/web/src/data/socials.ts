@@ -2,7 +2,7 @@ export const socials = {
   email: "hey@roushanrakesh.com",
   linkedin: "https://linkedin.com/in/rakeshroushan1002",
   github: "https://github.com/Rakesh1002",
-  twitter: "https://twitter.com/rakeshroushan",
+  twitter: "https://twitter.com/buildwithrakesh",
   studio: "https://roushan.xyz",
 } as const;
 
