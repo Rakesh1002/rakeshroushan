@@ -1,48 +1,128 @@
 ---
 import { socials } from "@/data/socials";
 
-interface Repo {
+interface Project {
   name: string;
-  description: string | null;
-  html_url: string;
-  homepage: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  topics: string[];
-  pushed_at: string;
-  private: boolean;
+  description: string;
+  url?: string;
+  tags: string[];
+  category: string;
+  status: "live" | "building" | "beta";
 }
 
-let repos: Repo[] = [];
-try {
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-  };
-  const token = import.meta.env.GITHUB_TOKEN;
-  if (token) headers.Authorization = `Bearer ${token}`;
+const projects: Project[] = [
+  {
+    name: "AudioPod AI",
+    description: "Unified AI audio workstation — speaker diarization, noise reduction, stem splitting, voice cloning, and translation. Canva for Audio.",
+    url: "https://audiopod.ai",
+    tags: ["AI/ML", "Audio", "SaaS"],
+    category: "VoiceAI",
+    status: "live",
+  },
+  {
+    name: "AgentDrive",
+    description: "AI agent framework built on Cloudflare Workers. Build, deploy, and monitor AI agents at the edge with near-zero latency.",
+    url: "https://agentdrive.sh",
+    tags: ["AI Agents", "DevTools", "Cloudflare"],
+    category: "DevToolsAI",
+    status: "live",
+  },
+  {
+    name: "Findable",
+    description: "AI-powered search and discovery platform. Help users find exactly what they need with semantic search and intelligent recommendations.",
+    url: "https://findable.sh",
+    tags: ["Search", "AI/ML", "SaaS"],
+    category: "SearchAI",
+    status: "live",
+  },
+  {
+    name: "Go2.gg",
+    description: "Modern URL shortener with analytics — custom domains, detailed click tracking, and developer-friendly API. Built on Cloudflare edge.",
+    url: "https://go2.gg",
+    tags: ["DevTools", "Analytics", "SaaS"],
+    category: "DevToolsAI",
+    status: "live",
+  },
+  {
+    name: "NameMyApp",
+    description: "AI-powered name generator for startups, products, and domains. Get creative, brandable names with instant domain availability checks.",
+    url: "https://namemy.app",
+    tags: ["AI/ML", "Branding", "Tools"],
+    category: "ContentAI",
+    status: "live",
+  },
+  {
+    name: "MailMolt",
+    description: "Email warm-up and deliverability service. Improve sender reputation, land in primary inbox, and monitor email health automatically.",
+    url: "https://mailmolt.com",
+    tags: ["Email", "DevTools", "SaaS"],
+    category: "DevToolsAI",
+    status: "live",
+  },
+  {
+    name: "ClawOcean",
+    description: "Web scraping and data extraction API. Clean, structured data from any website with AI-powered parsing and anti-bot handling.",
+    url: "https://clawocean.com",
+    tags: ["Data", "API", "DevTools"],
+    category: "DevToolsAI",
+    status: "live",
+  },
+  {
+    name: "AudioWhisper",
+    description: "AI meeting notes and ultrafast dictation. Transcribe meetings with speaker detection, generate summaries, and real-time voice-to-text.",
+    url: "https://audiowhisper.com",
+    tags: ["AI/ML", "Audio", "Productivity"],
+    category: "VoiceAI",
+    status: "building",
+  },
+  {
+    name: "UnSearch",
+    description: "RAG in 5 minutes, not 5 weeks. Complete Retrieval Augmented Generation API with document upload, semantic search, and AI answers.",
+    url: "https://unsearch.ai",
+    tags: ["RAG", "AI/ML", "API"],
+    category: "SearchAI",
+    status: "building",
+  },
+  {
+    name: "Competely",
+    description: "AI-powered competitor monitoring for SaaS. Track website changes, pricing updates, and feature launches. Get Slack alerts and battlecards.",
+    url: "https://competely.ai",
+    tags: ["AI/ML", "Intelligence", "SaaS"],
+    category: "SearchAI",
+    status: "building",
+  },
+  {
+    name: "ShipQuest",
+    description: "Production-ready SaaS boilerplate — Next.js + Cloudflare stack with auth, payments, AI, and analytics. Ship in a weekend.",
+    url: "https://shipquest.dev",
+    tags: ["Boilerplate", "DevTools", "SaaS"],
+    category: "DevToolsAI",
+    status: "live",
+  },
+  {
+    name: "Legally",
+    description: "AI contract review — upload any contract, get plain English summary with risk highlights and clause-by-clause breakdown in 60 seconds.",
+    tags: ["AI/ML", "Legal", "SaaS"],
+    category: "BizToolsAI",
+    status: "building",
+  },
+];
 
-  const res = await fetch(
-    `https://api.github.com/users/Rakesh1002/repos?sort=pushed&per_page=12&type=owner`,
-    { headers }
-  );
-  if (res.ok) {
-    const data = await res.json();
-    repos = data
-      .filter((r: Repo) => !r.private && r.description)
-      .slice(0, 6);
-  }
-} catch {
-  // Graceful degradation — show nothing if API fails
-}
+const statusColors = {
+  live: { bg: "bg-green-500/10", text: "text-green-400", label: "Live" },
+  building: { bg: "bg-yellow-500/10", text: "text-yellow-400", label: "Building" },
+  beta: { bg: "bg-blue-500/10", text: "text-blue-400", label: "Beta" },
+};
 ---
 
 <section id="projects" class="py-24 px-6">
   <div class="mx-auto max-w-6xl">
     <div class="flex items-center justify-between mb-12">
       <div>
-        <h2 class="text-3xl font-bold mb-4">Projects</h2>
-        <p class="text-text-muted">Open source work and side projects.</p>
+        <h2 class="text-3xl font-bold mb-4">Products</h2>
+        <p class="text-text-muted">
+          Building a portfolio of AI-powered products at <a href={socials.studio} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Roushan Venture Studio</a>.
+        </p>
       </div>
       <a
         href={socials.github}
@@ -50,7 +130,7 @@ try {
         rel="noopener noreferrer"
         class="hidden sm:inline-flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors"
       >
-        View all on GitHub
+        Open source
         <svg
           class="w-4 h-4"
           fill="none"
@@ -66,20 +146,27 @@ try {
       </a>
     </div>
 
-    {
-      repos.length > 0 ? (
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {repos.map((repo) => (
-            <a
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group block p-5 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
-            >
-              <div class="flex items-start justify-between mb-3">
-                <h3 class="font-semibold group-hover:text-accent transition-colors truncate">
-                  {repo.name}
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {projects.map((project) => {
+        const status = statusColors[project.status];
+        const Tag = project.url ? "a" : "div";
+        return (
+          <Tag
+            href={project.url}
+            target={project.url ? "_blank" : undefined}
+            rel={project.url ? "noopener noreferrer" : undefined}
+            class="group block p-5 rounded-xl border border-border hover:border-border-hover bg-bg-card/50 transition-all"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <h3 class="font-semibold group-hover:text-accent transition-colors">
+                  {project.name}
                 </h3>
+                <span class={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${status.bg} ${status.text}`}>
+                  {status.label}
+                </span>
+              </div>
+              {project.url && (
                 <svg
                   class="w-4 h-4 text-text-muted shrink-0 ml-2"
                   fill="none"
@@ -93,48 +180,25 @@ try {
                     d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
                   />
                 </svg>
+              )}
+            </div>
+            <p class="text-sm text-text-muted mb-4 line-clamp-2 leading-relaxed">
+              {project.description}
+            </p>
+            <div class="flex items-center gap-3 text-xs text-text-muted">
+              <span class="text-[10px] uppercase tracking-wider text-text-muted/60">{project.category}</span>
+              <span class="text-border">|</span>
+              <div class="flex flex-wrap gap-1.5">
+                {project.tags.slice(0, 2).map((tag) => (
+                  <span class="px-1.5 py-0.5 rounded bg-bg-secondary">
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <p class="text-sm text-text-muted mb-4 line-clamp-2 leading-relaxed">
-                {repo.description}
-              </p>
-              <div class="flex items-center gap-4 text-xs text-text-muted">
-                {repo.language && (
-                  <span class="flex items-center gap-1">
-                    <span class="w-2.5 h-2.5 rounded-full bg-accent" />
-                    {repo.language}
-                  </span>
-                )}
-                {repo.stargazers_count > 0 && (
-                  <span class="flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    {repo.stargazers_count}
-                  </span>
-                )}
-                {repo.forks_count > 0 && (
-                  <span class="flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M6 3a3 3 0 013 3c0 1.31-.83 2.42-2 2.83V11c0 .55.45 1 1 1h8c.55 0 1-.45 1-1V8.83c-1.17-.41-2-1.52-2-2.83a3 3 0 116 0c0 1.31-.83 2.42-2 2.83V11c0 1.65-1.35 3-3 3h-3v2.17c1.17.41 2 1.52 2 2.83a3 3 0 11-6 0c0-1.31.83-2.42 2-2.83V14H8c-1.65 0-3-1.35-3-3V8.83C3.83 8.42 3 7.31 3 6a3 3 0 013-3z" />
-                    </svg>
-                    {repo.forks_count}
-                  </span>
-                )}
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <p class="text-text-muted">
-          Loading projects...{" "}
-          <a
-            href={socials.github}
-            class="text-accent hover:underline"
-          >
-            View on GitHub
-          </a>
-        </p>
-      )
-    }
+            </div>
+          </Tag>
+        );
+      })}
+    </div>
   </div>
 </section>
