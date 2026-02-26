@@ -1,0 +1,40 @@
+---
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border/50"
+>
+  <div class="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
+    <a
+      href="/"
+      class="text-lg font-semibold tracking-tight hover:text-accent transition-colors"
+    >
+      R
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm text-text-muted hover:text-text transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <a
+      href="#contact"
+      class="text-sm px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg transition-colors"
+    >
+      Get in touch
+    </a>
+  </div>
+</nav>
