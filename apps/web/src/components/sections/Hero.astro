@@ -1,9 +1,14 @@
 ---
 import { socials, siteConfig } from "@/data/socials";
+import Starfield from "@/components/3d/Starfield";
+import ChatIsland from "@/components/ChatIsland";
 ---
 
 <section class="relative min-h-screen flex items-center justify-center pt-20">
-  <!-- Gradient background -->
+  <!-- 3D Starfield background -->
+  <Starfield client:visible />
+
+  <!-- Gradient overlay -->
   <div
     class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,oklch(0.205_0.05_41.116),transparent_60%)]"
   >
@@ -115,6 +120,11 @@ import { socials, siteConfig } from "@/data/socials";
           ></path>
         </svg>
       </a>
+    </div>
+
+    <!-- AI Chat trigger -->
+    <div class="mt-8">
+      <ChatIsland client:idle />
     </div>
   </div>
 
